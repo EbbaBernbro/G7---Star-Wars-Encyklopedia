@@ -3,6 +3,6 @@
 // export function clickedButton(){
 //     return "Du tryckte på knappen";
 // }
-// benjamin
+// benjamin awdasd awd
 
 let searchBtn = document.querySelector("#searchBtn");
