@@ -6,3 +6,4 @@
 // benjamin awdasd awd
 
 let searchBtn = document.querySelector("#searchBtn");
+searchBtn.addEventListener("click", apiFromJenny)
