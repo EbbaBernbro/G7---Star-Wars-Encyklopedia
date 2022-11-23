@@ -3,5 +3,6 @@
 // export function clickedButton(){
 //     return "Du tryckte på knappen";
 // }
+// benjamin
 
 let searchBtn = document.querySelector("#searchBtn");
