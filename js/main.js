@@ -11,5 +11,6 @@ import * as domModifier from './components/domModifier.js';
 // console.log(buttonHandler.clickedButton());
 // console.log(api.secret);
 
-
-
+const data2 = await api.getData("R2", "people");
+console.log(data);
+console.log(data2);
