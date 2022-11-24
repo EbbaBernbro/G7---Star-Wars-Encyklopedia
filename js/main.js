@@ -5,10 +5,15 @@ import * as buttonHandler from './components/buttonHandler.js';
 import * as domModifier from './components/domModifier.js';
 
 let searchBtn = document.querySelector(".searchBtn");
+const loader = document.querySelector(".loading");
+const result = document.querySelector(".results");
 
+console.log(loader);
 searchBtn.addEventListener("click", function(){
 
-    buttonHandler.search();
+    result.style.display = "block";
+    loader.style.display = "none";
+    result.classList.add("anim");
 
 })
 

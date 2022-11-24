@@ -12,7 +12,13 @@
         :root {
 
             --dark: #48453F;
+            --light: #f0f0f0;
 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -28,8 +34,42 @@
 
         }
 
+        .resultRow {
+
+            background-color: var(--light);
+        }
+
         img {
             width: 400px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            display: inline;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .results {
+
+            display: none;
+
+        }
+
+        .anim {
+            display: block;
+            transition: all 1400ms ease;
+        }
+
+        .error {
+            position: absolute;
+            top: 5rem;
+            left: 0;
+            right: 0;
         }
     </style>
 
@@ -48,28 +88,52 @@
             <div class="container vh-100 d-flex align-items-center">
 
                 <div class="w-100">
+
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="https://cdn.discordapp.com/attachments/1040547615881830410/1044967707117883432/image_4.png"
                             alt="">
                     </div>
 
-                    <div class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4">
+                    <div
+                        class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4 position-relative">
                         <input type="text" class="search w-100 form-control">
                         <select class="selectType w-25 form-select">
                             <option>Planeter</option>
                             <option>Personer</option>
                         </select>
                         <button class="searchBtn btn btn-primary w-25">Sök</button>
+
+                        <div class="alert error bg-danger text-white rounded-2 mt-4 alert-dismissible fade show">
+
+                            Något gick fel. Försök igen!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                        </div>
                     </div>
 
                     <div class="results mt-4 bg-light p-4 rounded-2">
-                        <p></p>
 
-                        <div class="loading d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                        <div class="result d-flex flex-column gap-4">
+
+                            <div class="resultRow d-flex align-items-center rounded-2 p-2 justify-content-between">
+
+                                <span>1</span>
+                                <span class="w-25">Luke</span>
+                                <span class="w-25">Banana</span>
+                                <span class="w-25">Melonas</span>
+                                <button class="btn btn-primary">Read more</button>
+                            </div>
+
+                        </div>
+
+                        <div class="loading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -88,7 +152,9 @@
     </footer>
 
     <script src="js/main.js" type="module"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
