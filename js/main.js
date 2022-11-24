@@ -7,13 +7,16 @@ import * as domModifier from './components/domModifier.js';
 let searchBtn = document.querySelector(".searchBtn");
 const loader = document.querySelector(".loading");
 const result = document.querySelector(".results");
+let searchPlace = document.querySelector(".topPart");
 
 console.log(loader);
+console.log(searchPlace);
 searchBtn.addEventListener("click", function(){
 
     result.style.display = "block";
     loader.style.display = "none";
     result.classList.add("anim");
+    searchPlace.classList.add("animSearch");
 
 })
 
