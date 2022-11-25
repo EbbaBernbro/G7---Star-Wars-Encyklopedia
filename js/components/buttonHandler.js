@@ -35,4 +35,6 @@ export function btnBackToSearch(){
 
 // read more tömma första diven. visar ny api request              -    töm befintliga diven sedan visa detaljvy
 
-// komma tillbaka till search sidan                                -    visa första diven igen
+// export function clickedButton(){
+//     return "Du tryckte på knappen";
+// }
