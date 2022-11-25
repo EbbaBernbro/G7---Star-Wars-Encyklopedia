@@ -4,19 +4,24 @@
 
 // search
 /*const btnToSearch = document.querySelector(".searchBtn");
+// ska en validerings funktion regex
 
 btnToSearch.addEventListener("click", getData("strängvärde", "subjekt")*/
+import * as api from './apiRequests.js';
+
+
+const btnToSearch = document.querySelector(".searchBtn");
 
 export function getValueOnClick() {
-  const btnToSearch = document.querySelector(".searchBtn");
   btnToSearch.addEventListener("click", () => {
     let value = document.querySelector(".search").value;
     console.log(value);
     let subject = document.querySelector(".selectType").value
     console.log(subject)
-    getData(value, subject)
+    api.getData(value, subject)
   });
 }
+getValueOnClick();
 
 // read more
 /*export function btnReadMore(){
