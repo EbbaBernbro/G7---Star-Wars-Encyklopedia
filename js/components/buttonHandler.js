@@ -8,13 +8,19 @@
 
 btnToSearch.addEventListener("click", getData("strängvärde", "subjekt")*/
 import * as api from './apiRequests.js';
-
+import * as errorHandler from './errorHandler.js';
 
 const btnToSearch = document.querySelector(".searchBtn");
 
 export function getValueOnClick() {
   btnToSearch.addEventListener("click", () => {
     let value = document.querySelector(".search").value;
+
+    if(value == ""){
+
+      errorHandler.newError("Fel", "Felaktig inmatning", "Skriv in rätt värde");
+
+    }
     console.log(value);
     let subject = document.querySelector(".selectType").value
     console.log(subject)

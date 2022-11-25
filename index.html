@@ -75,6 +75,12 @@
 
         }
 
+        .fastAnim {
+            transition: all 400ms ease;
+            animation-name: show;
+            animation-duration: 400ms;
+        }
+
         .anim {
             display: block;
             transition: all 1400ms ease;
@@ -83,12 +89,14 @@
             animation-duration: 1s;
         }
 
-        .error {
+        .alertArea {
             position: absolute;
             top: 5rem;
             left: 0;
             right: 0;
+            z-index: 100;
         }
+
 
         .searchPlace {
 
@@ -97,7 +105,27 @@
 
         }
 
-        @keyFrames moveUpSlow {
+        @keyframes show {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            25% {
+                transform: translateY(20px);
+            }
+
+            75% {
+                transform: translateY(30px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes moveUpSlow {
 
             0% {
                 transform: translateY(0);
@@ -160,14 +188,18 @@
                             class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4 position-relative">
                             <input type="text" class="search w-100 form-control">
                             <select class="selectType w-25 form-select">
-                                <option value="planets">Planets</option>
-                                <option value="people">People</option>
+                                <option value="planets">Planeter</option>
+                                <option value="people">Personer</option>
                             </select>
                             <button class="searchBtn btn btn-primary w-25">Sök</button>
 
-                            <div class="alert error bg-danger text-white rounded-2 mt-4 alert-dismissible fade show">
+                            <div class="alertArea">
 
-                                Något gick fel. Försök igen!
+                            </div>
+                            <div class="alert error bg-danger text-white rounded-2 mt-4 alert-dismissible fade d-flex gap-2 align-items-center"
+                                name="error">
+
+                                <h4 class="type"></h4><span class="title"></span><span class="description"></span>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
 
