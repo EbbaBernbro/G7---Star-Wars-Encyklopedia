@@ -1,34 +1,41 @@
 // Tar emot inputs ifrån sidan, skickar de vidare
-
-// export function clickedButton(){
-//     return "Du tryckte på knappen";
-// }
 // benjamin
 // search api call på apin och apin ska kalla på dom modifier      -    addEventListener skickar request om api data till jenny api sedan skickas det till dommodifier sen läggs det up på sidan
-function init() {
-  const searchBtn = document.getElementById('searchBtn');
-  searchBtn.addEventListener(
-      'click', 
-      searchBtnClick
-  );
+
+// search
+export function getValueOnClick() {
+  const btnToSearch = document.querySelector(".searchBtn");
+  btnToSearch.addEventListener("click", () => {
+    let value = document.querySelector(".search").value;
+    console.log(value);
+  });
 }
-init();
+
+/*let searchInput = document.querySelector(".search")
+
+export function btnSearch(){
+  const btnToSearch = document.querySelector('.searchBtn');
+  btnToSearch.addEventListener('click', (e) =>{
+    console.log()
+  }
+  )
+};*/
+
+//getData
+// read more
+/*export function btnReadMore(){
+  const btnToSearch = document.querySelector('.btn btn-primary');
+  btnToSearch.addEventListener('click', hej)
+};
 
 
-function searchBtnClick(){
-  alert("Hej")
-}
-searchBtnClick();
 
 
-
-
-
-
-
-
-
-
+//back to search
+export function btnBackToSearch(){
+  const btnToSearch = document.querySelector('.searchBtn');
+  btnToSearch.addEventListener('click', hej)
+};*/
 
 // read more tömma första diven. visar ny api request              -    töm befintliga diven sedan visa detaljvy
 
