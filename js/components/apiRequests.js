@@ -1,6 +1,7 @@
 // Här hämtar vi data ifrån Swapi och skickar det tillbaka med en return funktion
 
 import * as errorHandler from './errorHandler.js';
+import * as domModifier from './domModifier.js';
 
 const baseUrl = "https://swapi.dev/api/";
 
@@ -36,13 +37,19 @@ async function fetchApi(url) {
 }
 
 // Hämtar data från api enligt ingående parametrar och returnerar svar (subject är planet eller people)
-export async function getData(id, subject) {
+export async function getData(id, subject, page) {
     let answer;
-    const url = `${baseUrl}${subject}/?search=${id}`;
+
+    if(!page){
+        page = 1;
+    }
+    const url = `${baseUrl}${subject}/?search=${id}&page=${page}`;
     await fetchApi(url)
         .then(response => {
             //return answer = response;
             console.log(response)
+            domModifier.renderData(response);
+
         });
     // return answer;    
 }
