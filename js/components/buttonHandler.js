@@ -3,25 +3,21 @@
 // search api call på apin och apin ska kalla på dom modifier      -    addEventListener skickar request om api data till jenny api sedan skickas det till dommodifier sen läggs det up på sidan
 
 // search
+/*const btnToSearch = document.querySelector(".searchBtn");
+
+btnToSearch.addEventListener("click", getData("strängvärde", "subjekt")*/
+
 export function getValueOnClick() {
   const btnToSearch = document.querySelector(".searchBtn");
   btnToSearch.addEventListener("click", () => {
     let value = document.querySelector(".search").value;
     console.log(value);
+    let subject = document.querySelector(".selectType").value
+    console.log(subject)
+    getData(value, subject)
   });
 }
 
-/*let searchInput = document.querySelector(".search")
-
-export function btnSearch(){
-  const btnToSearch = document.querySelector('.searchBtn');
-  btnToSearch.addEventListener('click', (e) =>{
-    console.log()
-  }
-  )
-};*/
-
-//getData
 // read more
 /*export function btnReadMore(){
   const btnToSearch = document.querySelector('.btn btn-primary');
