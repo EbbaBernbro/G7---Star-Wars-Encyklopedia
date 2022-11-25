@@ -29,7 +29,9 @@ export async function getData(id, subject){
     const url=`${baseUrl}${subject}/?search=${id}`;
     await fetchApi(url)
         .then(response => {            
-            return answer = response;
+            //return answer = response;
+            console.log(response)
         });
-    return answer;
+    // return answer;    
 }
+

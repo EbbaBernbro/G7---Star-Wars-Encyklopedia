@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 let jennysApiObjekt = {
   count: 58,
   next: "https://swapi.dev/api/people/?search=a&page=2",
@@ -277,15 +276,8 @@ export function renderData(data) {
   }
 }
 
-renderData(jennysApiObjekt);
 
 //ID figma = 1:a resultat 2:a, 3:dje osv
 //Deras home planet
 
 //Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
-=======
-//Skicka data tillbaka till DOM, t.ex ny textrad
->>>>>>> 581942f81e1c73074c1bea2c587da70c506bc0a3
-=======
-//Skicka data tillbaka till DOM, t.ex ny textrad
->>>>>>> 581942f81e1c73074c1bea2c587da70c506bc0a3
