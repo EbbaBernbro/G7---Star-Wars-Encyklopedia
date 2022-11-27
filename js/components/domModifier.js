@@ -262,22 +262,52 @@ export function renderData(data) {
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".results"); //Ex. variable name, ID - quote-ist
   for (let i = 0; i < data.results.length; i++) {
+    //get the objects I guess
     const name = data.results[i].name;
-    const gender = data.results[i].gender;
+    const birthYear = data.results[i].birth_year;
     //Store all elements
     const div = document.createElement("div");
+    const idSpan = document.createElement("span");
+    const nameSpan = document.createElement("span");
+    const birthYearSpan = document.createElement("span");
+
+    //Add classes to div element
+    div.classList.add(
+      "resultRow",
+      "d-flex",
+      "align-items-center",
+      "rounded-2",
+      "p-2",
+      "justify-content-between"
+    );
+
+    /*Inuti skapa 4 span element,
+1: id
+2: Namn
+3: Ålder? */
+
+    resultTag.appendChild(div);
+    div.appendChild(idSpan);
+    div.appendChild(nameSpan); //FUNGERAR INTE!!>:(
+    div.appendChild(birthYearSpan);
 
     div.textContent = name;
-    resultTag.appendChild(div);
+    div.textContent = name;
+    div.textContent = birthYear;
 
+    // for (let i = 0; i < 3; i++) {
+    //   div.appendChild(span);
+    //   span.textContent();
+    // }
+
+    const button = document.createElement("button");
+    button.classList.add("btn", "btn-primary");
+    button.textContent = "Read more";
     // div.textContent = gender;
     // resultTag.appendChild(div);
   }
 }
 
 renderData(jennysApiObjekt);
-
-//ID figma = 1:a resultat 2:a, 3:dje osv
-//Deras home planet
 
 //Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
