@@ -258,56 +258,46 @@ let jennysApiObjekt = {
 /*Användaren skriver något i sökrutan och klickar på knappen sök. buttonHandler tar det värdet och skickar till apiRequest som
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
+//Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
+
 export function renderData(data) {
-  //Find the contatiner element where we want to attach everything
-  const resultTag = document.querySelector(".results"); //Ex. variable name, ID - quote-ist
+  //The container element where I want to attach everything
+  const getResultTag = document.querySelector(".results");
+  // KAn jag nog ta bort const getResults = data.results[i];
+
+  //Get list items in result object:
+  const name = data.results[i].name;
+  const birthYear = data.results[i].birth_year;
+
+  //Create new elements:
+  const divElement = document.createElement("div");
+  const idElement = document.createElement("span");
+  const nameElement = document.createElement("span");
+  const birthYearElement = document.createElement("span");
+
+  //Create classes and add to div element
+  divElement.classList.add(
+    "resultRow",
+    "d-flex",
+    "align-items-center",
+    "rounded-2",
+    "p-2",
+    "justify-content-between"
+  );
+
+  //Create 'Read More' button
+  const button = document.createElement("button");
+  button.classList.add("btn", "btn-primary");
+  button.textContent = "Read more";
+
+  //Append to result
+  getResultTag.appendChild(divElement);
+  divElement.appendChild(idElement, nameElement, birthYearElement);
+
+  //Unsure about this loop
   for (let i = 0; i < data.results.length; i++) {
-    //get the objects I guess
-    const name = data.results[i].name;
-    const birthYear = data.results[i].birth_year;
-    //Store all elements
-    const div = document.createElement("div");
-    const idSpan = document.createElement("span");
-    const nameSpan = document.createElement("span");
-    const birthYearSpan = document.createElement("span");
-
-    //Add classes to div element
-    div.classList.add(
-      "resultRow",
-      "d-flex",
-      "align-items-center",
-      "rounded-2",
-      "p-2",
-      "justify-content-between"
-    );
-
-    /*Inuti skapa 4 span element,
-1: id
-2: Namn
-3: Ålder? */
-
-    resultTag.appendChild(div);
-    div.appendChild(idSpan);
-    div.appendChild(nameSpan); //FUNGERAR INTE!!>:(
-    div.appendChild(birthYearSpan);
-
-    div.textContent = name;
-    div.textContent = name;
-    div.textContent = birthYear;
-
-    // for (let i = 0; i < 3; i++) {
-    //   div.appendChild(span);
-    //   span.textContent();
-    // }
-
-    const button = document.createElement("button");
-    button.classList.add("btn", "btn-primary");
-    button.textContent = "Read more";
-    // div.textContent = gender;
-    // resultTag.appendChild(div);
+    div.innerHTML();
   }
 }
 
 renderData(jennysApiObjekt);
-
-//Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
