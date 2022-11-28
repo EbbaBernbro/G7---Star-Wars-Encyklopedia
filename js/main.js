@@ -3,6 +3,7 @@
 import * as api from './components/apiRequests.js';
 import * as buttonHandler from './components/buttonHandler.js';
 import * as domModifier from './components/domModifier.js';
+import * as errorHandler from './components/errorHandler.js';
 
 let searchBtn = document.querySelector(".searchBtn");
 const loader = document.querySelector(".loading");
@@ -17,6 +18,8 @@ searchBtn.addEventListener("click", function(){
     loader.style.display = "none";
     result.classList.add("anim");
     searchPlace.classList.add("animSearch");
+
+    
 
 })
 

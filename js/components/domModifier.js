@@ -260,22 +260,67 @@ let jennysApiObjekt = {
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
 export function renderData(data) {
+  console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
-  const resultTag = document.querySelector(".results"); //Ex. variable name, ID - quote-ist
+  const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
+  setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
+    const id = i;
     const name = data.results[i].name;
     const gender = data.results[i].gender;
     //Store all elements
-    const div = document.createElement("div");
+    // const div = document.createElement("div");
 
-    div.textContent = name;
-    resultTag.appendChild(div);
+    // div.textContent = name;
+    // resultTag.appendChild(div);
+
+    console.log("----------");
+    console.log(data);
+    console.log(data.results[i].gender);
+    let result = document.querySelector(".resultRow");
+
+    let clone = result.cloneNode(true);
+    let idField = clone.querySelector("#id");
+    let nameField = clone.querySelector("#name");
+    let genderField = clone.querySelector("#gender");
+
+    idField.innerHTML = id;
+    nameField.innerHTML = name;
+    genderField.innerHTML = gender;
+
+
+
+    resultTag.appendChild(clone);
+
 
     // div.textContent = gender;
     // resultTag.appendChild(div);
   }
 }
 
+function setPagination(id) {
+
+  let number = id / 10;
+
+  for (let i = 2; i < number; i++) {
+    let pagination = document.querySelector(".pagination");
+
+    let row = document.querySelector(".pagination > .page-item:last-child");
+    let newRow = row.cloneNode(true);
+    newRow.classList.remove("active");
+
+    let link = newRow.querySelector("a");
+    link.innerHTML = i;
+
+    link.addEventListener("click", () => {
+
+      alert("Hej");
+
+    })
+    pagination.appendChild(newRow);
+  }
+
+}
 
 //ID figma = 1:a resultat 2:a, 3:dje osv
 //Deras home planet
