@@ -8,10 +8,7 @@
 
 btnToSearch.addEventListener("click", getData("strängvärde", "subjekt")*/
 import * as api from './apiRequests.js';
-
-
 const btnToSearch = document.querySelector(".searchBtn");
-
 export function getValueOnClick() {
   btnToSearch.addEventListener("click", () => {
     let value = document.querySelector(".search").value;
@@ -22,6 +19,7 @@ export function getValueOnClick() {
   });
 }
 getValueOnClick();
+
 
 // read more
 /*export function btnReadMore(){
