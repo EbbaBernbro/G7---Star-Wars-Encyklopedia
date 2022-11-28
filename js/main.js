@@ -20,6 +20,10 @@ searchBtn.addEventListener("click", function(){
 
 })
 
+let readMore = document.querySelector('#read')
+readMore.addEventListener("click", () =>{
+    result.style.display = "none";
+})
 
 //Hämtar från apiRequests.js
 // console.log(api.getPlanets());

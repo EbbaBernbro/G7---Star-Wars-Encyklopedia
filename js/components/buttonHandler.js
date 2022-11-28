@@ -21,6 +21,26 @@ export function getValueOnClick() {
 getValueOnClick();
 
 
+
+
+
+
+
+
+
+export function readMore(){
+
+
+  
+}
+
+
+
+
+
+
+
+
 // read more
 /*export function btnReadMore(){
   const btnToSearch = document.querySelector('.btn btn-primary');
