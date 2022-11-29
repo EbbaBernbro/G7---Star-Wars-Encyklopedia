@@ -33,3 +33,5 @@ searchBtn.addEventListener("click", function(){
 
 // const data2 = await api.getData("R2", "people");
 
+
+let variabel = true;

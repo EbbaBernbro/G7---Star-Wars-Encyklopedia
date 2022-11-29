@@ -11,7 +11,6 @@ import * as api from './apiRequests.js';
 import * as errorHandler from './errorHandler.js';
 
 const btnToSearch = document.querySelector(".searchBtn");
-
 export function getValueOnClick() {
   btnToSearch.addEventListener("click", () => {
     let value = document.querySelector(".search").value;
@@ -28,6 +27,9 @@ export function getValueOnClick() {
   });
 }
 getValueOnClick();
+
+
+
 
 // read more
 /*export function btnReadMore(){

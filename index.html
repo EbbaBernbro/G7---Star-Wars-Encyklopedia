@@ -45,6 +45,8 @@
         .resultRow {
 
             background-color: var(--light);
+            display: none;
+
         }
 
         img {
@@ -160,6 +162,19 @@
             }
 
         }
+
+        .readMore {
+            display: none;
+        }
+
+        .hideResult {
+            display: none;
+        }
+
+
+        .show {
+            display: block;
+        }
     </style>
 
 </head>
@@ -231,18 +246,39 @@
                             </ul>
                         </nav>
 
-                        <div class="result d-flex flex-column gap-4">
-
-                            <div class="resultRow d-flex align-items-center rounded-2 p-2 justify-content-between">
+                        <div class="resultRow">
+                            <div class="d-flex align-items-center rounded-2 p-2 justify-content-between">
 
                                 <span class="id" id="id">ID</span>
                                 <span class="w-25" class="name" id="name">Namn</span>
                                 <span class="w-25" class="gender" id="gender">Gender</span>
                                 <!-- <span class="w-25">Melonas</span> -->
-                                <button class="btn btn-primary">Read more</button>
+                                <button class="read btn btn-primary">Read more</button>
+                                
                             </div>
+                        </div>
+
+                        <div class="result d-flex flex-column gap-4">
 
                         </div>
+
+                        <div class="readMore">
+                            <div class="bg-dark text-white">
+                                <span class="nameMore">Name</span>
+                                <span class="genderMore">Gender</span>
+                                <span class="hair">Hair color</span>
+                                <span class="skin">Skin color</span>
+                                <span>Eye color</span>
+                                <span>Birth year</span>
+                                <span>Mass</span>
+                                <span>Home</span>
+                                <span>Another thing</span>
+                                <button id="backToSearch">Back To Search</button>
+                            </div>
+                        </div>
+
+
+
 
                         <div class="loading">
                             <div class="d-flex justify-content-center">
