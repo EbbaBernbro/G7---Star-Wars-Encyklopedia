@@ -14,6 +14,7 @@ export function renderData(data) {
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
+  clearResults(resultTag);
   resultTag.innerHTML = "";
   setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
@@ -67,6 +68,12 @@ export function renderData(data) {
     // div.textContent = gender;
     // resultTag.appendChild(div);
   }
+}
+
+function clearResults(input) {   
+  for (let i = 0; i < input.length; i++) {
+      input[i].remove();
+  }    
 }
 
 function setPagination(id) {
