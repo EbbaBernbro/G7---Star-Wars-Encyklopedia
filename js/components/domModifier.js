@@ -256,7 +256,7 @@ export function renderData(data) {
   setPagination(data.count); //argument passed to setPagination function further down in this code.
 
   for (let i = 0; i < data.results.length; i++) {
-    const id = i;
+    const id = data.results[i].url.split("/").splice(-2, 1);
     const name = data.results[i].name;
     const gender = data.results[i].gender;
 
