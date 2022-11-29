@@ -250,53 +250,30 @@ let jennysApiObjekt = {
   ],
 };
 
-//Skicka data tillbaka till DOM, t.ex ny textrad
-
-//Jag skapar en render funktion som hon kör i sin api fil där hon skickar in data till mig i en parameter
-//if data do this - kolla datan sen bygga upp document.create element list item (create element ul html)
-
-/*Användaren skriver något i sökrutan och klickar på knappen sök. buttonHandler tar det värdet och skickar till apiRequest som
-i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
-
-//Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
-
 export function renderData(data) {
-  //The container element where I want to attach everything
-  const getResultTag = document.querySelector(".results");
-  // KAn jag nog ta bort const getResults = data.results[i];
+  const getResultTag = document.querySelector(".results"); //The container element where I want to attach everything
 
-  //Get list items in result object:
-  const name = data.results[i].name;
-  const birthYear = data.results[i].birth_year;
+  setPagination(data.count); //argument passed to setPagination function further down in this code.
 
-  //Create new elements:
-  const divElement = document.createElement("div");
-  const idElement = document.createElement("span");
-  const nameElement = document.createElement("span");
-  const birthYearElement = document.createElement("span");
-
-  //Create classes and add to div element
-  divElement.classList.add(
-    "resultRow",
-    "d-flex",
-    "align-items-center",
-    "rounded-2",
-    "p-2",
-    "justify-content-between"
-  );
-
-  //Create 'Read More' button
-  const button = document.createElement("button");
-  button.classList.add("btn", "btn-primary");
-  button.textContent = "Read more";
-
-  //Append to result
-  getResultTag.appendChild(divElement);
-  divElement.appendChild(idElement, nameElement, birthYearElement);
-
-  //Unsure about this loop
   for (let i = 0; i < data.results.length; i++) {
-    div.innerHTML();
+    const id = i;
+    const name = data.results[i].name;
+    const gender = data.results[i].gender;
+
+    let result = document.querySelector(".resultRow"); //Original node with class attribute
+
+    let clone = result.cloneNode(true); //If true, the node and its whole subtree is copied
+    //clones with unique IDs ↓
+    let idField = clone.querySelector("#id");
+    let nameField = clone.querySelector("#name");
+    let genderField = clone.querySelector("#gender");
+
+    //Display data ↓
+    idField.innerHTML = id;
+    nameField.innerHTML = name;
+    genderField.innerHTML = gender;
+
+    getResultTag.appendChild(clone); //the cloned node has no parent and is not part of the document until it's added to another node that is part of the document.
   }
 }
 
