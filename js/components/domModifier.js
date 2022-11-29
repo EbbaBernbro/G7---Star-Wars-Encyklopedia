@@ -69,7 +69,7 @@ export function renderData(data) {
     // resultTag.appendChild(div);
   }
 }
-
+// loop som tar bort alla divar i result
 function clearResults(input) {   
   for (let i = 0; i < input.length; i++) {
       input[i].remove();
