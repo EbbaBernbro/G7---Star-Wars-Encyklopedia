@@ -7,7 +7,7 @@
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
 export function renderData(data) {
-  console.log("Got: " + data.results.length + " matches");
+  // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
   setPagination(data.count);
@@ -15,30 +15,52 @@ export function renderData(data) {
     const id = data.results[i].url.split("/").splice(-2, 1);
     const name = data.results[i].name;
     const gender = data.results[i].gender;
-       //Store all elements
+    //Store all elements
     // const div = document.createElement("div");
 
     // div.textContent = name;
     // resultTag.appendChild(div);
 
-    console.log("----------");
-    console.log(data);
-    console.log(data.results[i].gender);
+    // console.log("----------");
+    // console.log(data);
+    // console.log(data.results[i].gender);
     let result = document.querySelector(".resultRow");
 
     let clone = result.cloneNode(true);
+    let cloneButton = clone.querySelector("button");
+
     let idField = clone.querySelector("#id");
     let nameField = clone.querySelector("#name");
     let genderField = clone.querySelector("#gender");
 
-    console.log(clone);
+    // console.log(clone);
     idField.innerHTML = id;
     nameField.innerHTML = name;
     genderField.innerHTML = gender;
 
+    let dataEncode = encodeURIComponent(JSON.stringify(data.results[i]));
+
+    cloneButton.setAttribute("data", dataEncode);
+
+    cloneButton.addEventListener("click", function () {
+
+      let readMore = document.querySelector(".readMore");
+      console.log(readMore);
+      readMore.classList.add("show");
+
+      let result = JSON.parse(decodeURIComponent(this.getAttribute("data")));
+
+      let name = document.querySelector(".nameMore");
+      let gender = document.querySelector(".genderMore");
+      name.innerHTML = result.name;
+      gender.innerHTML = result.gender;
+
+      console.log(result);
+
+    })
     resultTag.appendChild(clone);
 
-    readMoreData()
+    // readMoreData()
     // div.textContent = gender;
     // resultTag.appendChild(div);
   }
@@ -65,20 +87,20 @@ function setPagination(id) {
 }
 
 
-function readMoreData(){
+function readMoreData() {
   let read = document.querySelectorAll(".read");
-    let readmore = document.querySelector('.readMore')
-    let result = document.querySelector(".resultRow");
-    console.log(read);
-    read.forEach((e) => {
-      console.log(e);
-      e.addEventListener("click", () => {
-        console.log("Du tryckte på read more");
-        readmore.setAttribute("class", "showReadMore")
-        result.setAttribute("class", "hideResult")
-        
-      });
+  let readmore = document.querySelector('.readMore')
+  let result = document.querySelector(".resultRow");
+  // console.log(read);
+  read.forEach((e) => {
+    // console.log(e);
+    e.addEventListener("click", () => {
+      console.log("Du tryckte på read more");
+      readmore.setAttribute("class", "showReadMore")
+      result.setAttribute("class", "hideResult")
+
     });
+  });
 }
 
 //ID figma = 1:a resultat 2:a, 3:dje osv
