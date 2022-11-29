@@ -12,7 +12,7 @@ export function renderData(data) {
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
   setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
-    const id = i;
+    const id = data.results[i].url.split("/").splice(-2, 1);
     const name = data.results[i].name;
     const gender = data.results[i].gender;
        //Store all elements
@@ -76,8 +76,7 @@ function readMoreData(){
         console.log("Du tryckte på read more");
         readmore.setAttribute("class", "showReadMore")
         result.setAttribute("class", "hideResult")
-
-        // if sats som gör när knappen read more trycks visa detaljvyn och display none på result
+        
       });
     });
 }
