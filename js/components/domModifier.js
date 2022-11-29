@@ -6,10 +6,15 @@
 /*Användaren skriver något i sökrutan och klickar på knappen sök. buttonHandler tar det värdet och skickar till apiRequest som
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
+let latestResult = [];
+
 export function renderData(data) {
+  latestResult = data;
+
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
+  resultTag.innerHTML = "";
   setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1);
@@ -28,6 +33,7 @@ export function renderData(data) {
 
     let clone = result.cloneNode(true);
     let cloneButton = clone.querySelector("button");
+    clone.classList.add("show");
 
     let idField = clone.querySelector("#id");
     let nameField = clone.querySelector("#name");
@@ -38,24 +44,20 @@ export function renderData(data) {
     nameField.innerHTML = name;
     genderField.innerHTML = gender;
 
-    let dataEncode = encodeURIComponent(JSON.stringify(data.results[i]));
-
-    cloneButton.setAttribute("data", dataEncode);
+    cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
 
-      let readMore = document.querySelector(".readMore");
-      console.log(readMore);
-      readMore.classList.add("show");
+      resultTag.innerHTML = "";
 
-      let result = JSON.parse(decodeURIComponent(this.getAttribute("data")));
+      let readMore = document.querySelector(".readMore");
+      readMore.classList.add("show");
+      let resultData = getResultId(this.getAttribute("data"));
 
       let name = document.querySelector(".nameMore");
       let gender = document.querySelector(".genderMore");
-      name.innerHTML = result.name;
-      gender.innerHTML = result.gender;
-
-      console.log(result);
+      name.innerHTML = resultData.name;
+      gender.innerHTML = resultData.gender;
 
     })
     resultTag.appendChild(clone);
@@ -86,23 +88,21 @@ function setPagination(id) {
   }
 }
 
+function getResultId(checkId) {
 
-function readMoreData() {
-  let read = document.querySelectorAll(".read");
-  let readmore = document.querySelector('.readMore')
-  let result = document.querySelector(".resultRow");
-  // console.log(read);
-  read.forEach((e) => {
-    // console.log(e);
-    e.addEventListener("click", () => {
-      console.log("Du tryckte på read more");
-      readmore.setAttribute("class", "showReadMore")
-      result.setAttribute("class", "hideResult")
+  for (let i = 0; i < latestResult.results.length; i++) {
 
-    });
-  });
+    const id = latestResult.results[i].url.split("/").splice(-2, 1);
+
+    if (id == checkId) {
+
+      return latestResult.results[i];
+
+    }
+
+  }
+
 }
-
 //ID figma = 1:a resultat 2:a, 3:dje osv
 //Deras home planet
 //Kunna dölja noding bar - aktivera/inaktivera hide/show en klass
