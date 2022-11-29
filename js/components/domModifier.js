@@ -267,7 +267,7 @@ export function renderData(data) {
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1);
     console.log(id)
-    const name = data.results[i].name;
+    const name = data.results[i].name ? data.results[i].name : data.results[i].title;
     const gender = data.results[i].gender;
     //Store all elements
     // const div = document.createElement("div");

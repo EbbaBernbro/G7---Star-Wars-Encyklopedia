@@ -37,17 +37,17 @@ async function fetchApi(url) {
 }
 
 // Hämtar data från api enligt ingående parametrar och returnerar svar (subject är planet eller people)
-export async function getData(id, subject, page) {
+export async function getData(id, subject) {
     let answer;
 
-    if(!page){
-        page = 1;
-    }
-    const url = `${baseUrl}${subject}/?search=${id}&page=${page}`;
+    // if(!page){
+    //     page = 1;
+    // }
+    const url = `${baseUrl}${subject}/?search=${id}`;
     await fetchApi(url)
         .then(response => {
             //return answer = response;
-            console.log(response)
+            console.log("Api Response: ", response)
             domModifier.renderData(response);
 
         });
