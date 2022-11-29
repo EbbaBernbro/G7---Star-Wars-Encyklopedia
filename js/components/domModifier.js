@@ -65,7 +65,6 @@ function setPagination(id) {
 }
 
 
-
 function readMoreData(){
   let read = document.querySelectorAll(".read");
     let readmore = document.querySelector('.readMore')
@@ -76,7 +75,7 @@ function readMoreData(){
       e.addEventListener("click", () => {
         console.log("Du tryckte på read more");
         readmore.setAttribute("class", "showReadMore")
-        result.setAttribute("class", "hideResult" )
+        result.setAttribute("class", "hideResult")
 
         // if sats som gör när knappen read more trycks visa detaljvyn och display none på result
       });
