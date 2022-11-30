@@ -3,43 +3,45 @@
 import * as errorHandler from './errorHandler.js';
 import * as domModifier from './domModifier.js';
 
-const baseUrl = "https://swapi.dev/api/";
-
-
-async function fetchApi(url) {
+export async function fetchApi(url) {
     try {
         const response = await fetch(url);
-        if (response.ok) {
-            
+        if (response.ok) {            
             const jsonResponse = await response.json();
-
-         
-            if(jsonResponse.results.length == 0){
-    
-                errorHandler.newError("Fel", "", "Hittade inget");
-    
-            }
-            
+            console.log(jsonResponse)    
+            if(jsonResponse.results && jsonResponse.results.length == 0){   
+                errorHandler.newError("Fel", "", "Hittade inget");    
+            } 
             return jsonResponse;
-        }
-       
-        else {
-           
+        } else {
             errorHandler.newError("error", "", "Hittade inga svar efter " + url);
-        }
+            }
 
     } catch (error) {
-       
-        errorHandler.newError("error", "Api problem", "Något gick fel med api, " + response.status);
+       errorHandler.newError("error", "Api problem", "Något gick fel med api, " + response.status);
     }
 }
 
-export async function getData(id, subject, page) {
-    let answer;
+export function categoryFiller(){
+    const dropdown = document.getElementById("dropdown");
+    fetchApi("https://swapi.dev/api/")
+        .then(response => {
+            for (let item in response) {
+                let option = document.createElement("option");
+                dropdown.append(option);
+                let string = item;
+                option.innerText = string.charAt(0).toUpperCase() + string.slice(1);
+                option.value = item;
+            }
+        })
+}
 
-    // if(!page){
-    //     page = 1;
-    // }
+export async function getData(id, subject, page) {
+    const baseUrl = "https://swapi.dev/api/";
+
+    if(!page){
+         page = 1;
+    }
     const url = `${baseUrl}${subject}/?search=${id}`;
     await fetchApi(url)
         .then(response => {
