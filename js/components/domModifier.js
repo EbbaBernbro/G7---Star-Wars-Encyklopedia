@@ -48,7 +48,7 @@ export function renderData(data) {
     cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
-      resultTag.innerHTML = "";
+        resultTag.innerHTML = "";
 
       let readMore = document.querySelector(".readMore");
       readMore.classList.add("show");
@@ -63,6 +63,8 @@ export function renderData(data) {
       let birth = document.querySelector(".birth");
       let mass = document.querySelector(".mass");
       let home = document.querySelector(".home");
+      let href = document.querySelector(".href")
+
 
       name.innerHTML = resultData.name;
       gender.innerHTML = resultData.gender;
@@ -73,6 +75,9 @@ export function renderData(data) {
       birth.innerHTML = resultData.birth_year;
       mass.innerHTML = resultData.mass;
       home.innerHTML = resultData.homeworld.name;
+      let theHref = resultData.homeworld
+      console.log(resultData);
+      href.setAttribute("href", theHref)
       let returnButton = document.querySelector("#backToSearch");
       returnButton.addEventListener("click", () => {
         resultTag.appendChild(clone);
