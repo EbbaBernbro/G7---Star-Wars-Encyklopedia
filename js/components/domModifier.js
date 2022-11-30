@@ -6,16 +6,18 @@
 /*Användaren skriver något i sökrutan och klickar på knappen sök. buttonHandler tar det värdet och skickar till apiRequest som
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
+import * as api from './apiRequests.js';
+
 let latestResult = [];
 
-export function renderData(data) {
+export function renderData(data, searchString) {
   latestResult = data;
 
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
   resultTag.innerHTML = "";
-  setPagination(data.count);
+  setPagination(data.count, searchString);
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1);
     const name = data.results[i].name;
@@ -68,7 +70,7 @@ export function renderData(data) {
   }
 }
 
-function setPagination(id) {
+function setPagination(id, searchString) {
   let number = id / 10;
   let pagination = document.querySelector(".pagination");
 
@@ -82,22 +84,33 @@ function setPagination(id) {
   previousLink.innerHTML = "Previous";
   pagination.appendChild(firstItem);
 
-  for (let i = 1; i < number; i++) {
+  for (let i = 0; i < number; i++) {
 
     let newRow = pageItem.cloneNode(true);
 
-    if (i > 1) {
+    if (i > 0) {
+
       newRow.classList.remove("active");
+
     }
 
 
     let link = newRow.querySelector("a");
-    link.innerHTML = i;
+    link.innerHTML = i + 1;
 
-    link.addEventListener("click", () => {
-      alert("Hej");
-    });
     pagination.appendChild(newRow);
+  }
+
+  let allItem = document.querySelectorAll(".page-item");
+
+  for (let i = 0; i < allItem.length; i++) {
+
+    allItem[i].addEventListener("click", function () {
+      
+      api.getData(searchString, "people", this.querySelector("a").innerHTML);
+      this.classList.add("active");
+
+    })
   }
 }
 

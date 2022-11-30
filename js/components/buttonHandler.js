@@ -23,7 +23,7 @@ export function getValueOnClick() {
     console.log(value);
     let subject = document.querySelector(".selectType").value
     console.log(subject)
-    api.getData(value, subject)
+    api.getData(value, subject, null)
   });
 }
 getValueOnClick();

@@ -48,7 +48,7 @@ export async function getData(id, subject, page) {
         .then(response => {
             //return answer = response;
             console.log(response)
-            domModifier.renderData(response);
+            domModifier.renderData(response, id);
 
         });
     // return answer;    
