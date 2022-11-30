@@ -11,8 +11,23 @@ import * as api from './apiRequests.js';
 import * as errorHandler from './errorHandler.js';
 
 const btnToSearch = document.querySelector(".searchBtn");
+const result = document.querySelector(".results");
+let searchPlace = document.querySelector(".topPart");
+let spinner = document.querySelector(".loading");
+
+let listView = document.querySelector(".listView");
+let readMore = document.querySelector(".readMore");
 export function getValueOnClick() {
+
   btnToSearch.addEventListener("click", () => {
+
+    readMore.classList.remove("show");
+    listView.classList.add("hide");
+    spinner.classList.remove("hide");
+    
+    result.classList.add("anim");
+    searchPlace.classList.add("animSearch");
+
     let value = document.querySelector(".search").value;
 
     if(value == ""){
@@ -23,31 +38,8 @@ export function getValueOnClick() {
     console.log(value);
     let subject = document.querySelector(".selectType").value
     console.log(subject)
-    api.getData(value, subject)
+    api.getData(value, subject, null)
   });
 }
 getValueOnClick();
 
-
-
-
-// read more
-/*export function btnReadMore(){
-  const btnToSearch = document.querySelector('.btn btn-primary');
-  btnToSearch.addEventListener('click', hej)
-};
-
-
-
-
-//back to search
-export function btnBackToSearch(){
-  const btnToSearch = document.querySelector('.searchBtn');
-  btnToSearch.addEventListener('click', hej)
-};*/
-
-// read more tömma första diven. visar ny api request              -    töm befintliga diven sedan visa detaljvy
-
-// export function clickedButton(){
-//     return "Du tryckte på knappen";
-// }

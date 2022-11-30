@@ -20,28 +20,18 @@ export function newError(type, name, description) {
 
     showError();
 
-    // console.log("Created new error");
+
 
 }
 
 function showError() {
 
-    // for (let i = 0; errorStorage.length; i++) {
-
-    //     if (errorStorage[i]) {
-    //         console.log("Error: " + errorStorage[i].name);
-    //     }
-
-    // }
-
     let errorContainer = document.querySelector(".alert");
-    // let type = document.querySelector(".alert > .type");
-    // let title = document.querySelector(".alert > .title");
-    console.log("Vi har sparat: " + errorStorage.length);
-    console.log(errorStorage);
+
+    
     errorStorage.forEach((element, index) => {
 
-        console.log(index);
+        
         errorStorage.splice(index, 1);
         // let newAlert = document.createElement("div");
         // newAlert.classList.add("alert", "error", "bg-danger", "text-white", "rounded-2", "mt-4", "alert-dismissible", "fade");
@@ -82,7 +72,7 @@ function showError() {
         description.innerHTML = element.description;
 
         alertArea.appendChild(clone);
-        console.log(element.name);
+        
         // errorContainer.classList.add("show");
         // type.innerText = element.type;
         // title.innerText = element.name;
