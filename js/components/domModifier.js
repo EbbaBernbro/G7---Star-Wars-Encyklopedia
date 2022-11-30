@@ -10,10 +10,11 @@ let latestResult = [];
 
 export function renderData(data) {
   latestResult = data;
-
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
+  let cookie = document.cookie;
+  cookie = resultTag;
   resultTag.innerHTML = "";
   setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
@@ -47,7 +48,6 @@ export function renderData(data) {
     cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
-
       resultTag.innerHTML = "";
 
       let readMore = document.querySelector(".readMore");
@@ -56,15 +56,32 @@ export function renderData(data) {
 
       let name = document.querySelector(".nameMore");
       let gender = document.querySelector(".genderMore");
+      let heigth = document.querySelector(".height");
+      let hair = document.querySelector(".hair");
+      let skin = document.querySelector(".skin");
+      let eye = document.querySelector(".eye");
+      let birth = document.querySelector(".birth");
+      let mass = document.querySelector(".mass");
+      let home = document.querySelector(".home");
+
       name.innerHTML = resultData.name;
       gender.innerHTML = resultData.gender;
-
-    })
+      heigth.innerHTML = resultData.height;
+      hair.innerHTML = resultData.hair_color;
+      skin.innerHTML = resultData.skin_color;
+      eye.innerHTML = resultData.eye_color;
+      birth.innerHTML = resultData.birth_year;
+      mass.innerHTML = resultData.mass;
+      home.innerHTML = resultData.homeworld.name;
+      let returnButton = document.querySelector("#backToSearch");
+      returnButton.addEventListener("click", () => {
+        resultTag.appendChild(clone);
+        readMore.classList.add("d-none");
+      });
+    });
     resultTag.appendChild(clone);
-
-    // readMoreData()
-    // div.textContent = gender;
-    // resultTag.appendChild(div);
+    console.log(latestResult);
+    console.log(cookie)
   }
 }
 
@@ -89,19 +106,13 @@ function setPagination(id) {
 }
 
 function getResultId(checkId) {
-
   for (let i = 0; i < latestResult.results.length; i++) {
-
     const id = latestResult.results[i].url.split("/").splice(-2, 1);
 
     if (id == checkId) {
-
       return latestResult.results[i];
-
     }
-
   }
-
 }
 //ID figma = 1:a resultat 2:a, 3:dje osv
 //Deras home planet

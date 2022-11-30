@@ -28,26 +28,3 @@ export function getValueOnClick() {
 }
 getValueOnClick();
 
-
-
-
-// read more
-/*export function btnReadMore(){
-  const btnToSearch = document.querySelector('.btn btn-primary');
-  btnToSearch.addEventListener('click', hej)
-};
-
-
-
-
-//back to search
-export function btnBackToSearch(){
-  const btnToSearch = document.querySelector('.searchBtn');
-  btnToSearch.addEventListener('click', hej)
-};*/
-
-// read more tömma första diven. visar ny api request              -    töm befintliga diven sedan visa detaljvy
-
-// export function clickedButton(){
-//     return "Du tryckte på knappen";
-// }
