@@ -70,13 +70,26 @@ export function renderData(data) {
 
 function setPagination(id) {
   let number = id / 10;
+  let pagination = document.querySelector(".pagination");
 
-  for (let i = 2; i < number; i++) {
-    let pagination = document.querySelector(".pagination");
+  pagination.innerHTML = "";
 
-    let row = document.querySelector(".pagination > .page-item:last-child");
-    let newRow = row.cloneNode(true);
-    newRow.classList.remove("active");
+  let pageItem = document.querySelector(".base > .page-item");
+  let firstItem = pageItem.cloneNode(true);
+  let previousLink = firstItem.querySelector("a");
+
+  firstItem.classList.remove("active");
+  previousLink.innerHTML = "Previous";
+  pagination.appendChild(firstItem);
+
+  for (let i = 1; i < number; i++) {
+
+    let newRow = pageItem.cloneNode(true);
+
+    if (i > 1) {
+      newRow.classList.remove("active");
+    }
+
 
     let link = newRow.querySelector("a");
     link.innerHTML = i;
