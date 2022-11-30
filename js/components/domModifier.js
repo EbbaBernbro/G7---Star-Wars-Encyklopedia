@@ -20,6 +20,7 @@ export function renderData(data, searchString, category) {
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
   
+  
   resultTag.innerHTML = "";
   setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
