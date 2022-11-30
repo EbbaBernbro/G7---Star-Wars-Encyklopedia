@@ -1,319 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
     <title>StarWars Encyclopedia</title>
     <style>
-        :root {
+      :root {
+        --dark: #48453f;
+        --light: #f0f0f0;
+      }
 
-            --dark: #48453F;
-            --light: #f0f0f0;
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
+      body {
+        background-color: var(--bs-dark);
+        /* overflow: hidden; */
+      }
+
+      .btn-primary {
+        background-color: var(--dark);
+        border: 0;
+      }
+
+      .btn-primary:hover {
+        animation-name: buttonPress;
+        animation-duration: 1s;
+      }
+
+      .resultRow {
+        background-color: var(--light);
+        display: none;
+      }
+
+      img {
+        width: 400px;
+      }
+
+      ul,
+      li {
+        list-style: none;
+        display: inline;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .results {
+        display: none;
+      }
+
+      .animSearch {
+        animation-name: moveUpSlow;
+        animation-duration: 1s;
+      }
+
+      .fastAnim {
+        transition: all 400ms ease;
+        animation-name: show;
+        animation-duration: 400ms;
+      }
+
+      .anim {
+        display: block;
+        transition: all 1400ms ease;
+
+        animation-name: moveUp;
+        animation-duration: 1s;
+      }
+
+      .alertArea {
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .searchPlace {
+        animation-name: introAnim;
+        animation-duration: 400ms;
+      }
+
+      @keyframes show {
+        0% {
+          transform: translateY(0);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
+        25% {
+          transform: translateY(20px);
         }
 
-        body {
-
-            background-color: var(--bs-dark);
-            /* overflow: hidden; */
-
+        75% {
+          transform: translateY(30px);
         }
 
-        .btn-primary {
+        100% {
+          transform: translateY(0);
+        }
+      }
 
-            background-color: var(--dark);
-            border: 0;
-
+      @keyframes moveUpSlow {
+        0% {
+          transform: translateY(0);
         }
 
-        .btn-primary:hover {
+        25% {
+          transform: translateY(10px);
+        }
+      }
 
-            animation-name: buttonPress;
-            animation-duration: 1s;
-
+      @keyframes moveUp {
+        from {
+          transform: translateY(1000px);
         }
 
-        .resultRow {
+        to {
+          transform: translateY(0px);
+        }
+      }
 
-            background-color: var(--light);
-            display: none;
-
+      @keyframes introAnim {
+        from {
+          transform: scale(0);
         }
 
-        img {
-            width: 400px;
+        to {
+          transform: scale(1);
         }
+      }
 
-        ul,
-        li {
-            list-style: none;
-            display: inline;
-        }
+      .readMore {
+        display: none;
+        background-color: rgb(250, 239, 239);
+      }
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
+      .hideResult {
+        display: none;
+      }
 
-        .results {
-
-            display: none;
-
-        }
-
-        .animSearch {
-
-            animation-name: moveUpSlow;
-            animation-duration: 1s;
-
-        }
-
-        .fastAnim {
-            transition: all 400ms ease;
-            animation-name: show;
-            animation-duration: 400ms;
-        }
-
-        .anim {
-            display: block;
-            transition: all 1400ms ease;
-
-            animation-name: moveUp;
-            animation-duration: 1s;
-        }
-
-        .alertArea {
-            position: absolute;
-            top: 5rem;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
-
-
-        .searchPlace {
-
-            animation-name: introAnim;
-            animation-duration: 400ms;
-
-        }
-
-        @keyframes show {
-
-            0% {
-                transform: translateY(0);
-            }
-
-            25% {
-                transform: translateY(20px);
-            }
-
-            75% {
-                transform: translateY(30px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-
-        }
-
-        @keyframes moveUpSlow {
-
-            0% {
-                transform: translateY(0);
-            }
-
-            25% {
-                transform: translateY(10px);
-            }
-
-        }
-
-        @keyframes moveUp {
-
-            from {
-                transform: translateY(1000px);
-            }
-
-            to {
-                transform: translateY(0px);
-            }
-
-        }
-
-        @keyframes introAnim {
-
-            from {
-                transform: scale(0);
-            }
-
-            to {
-                transform: scale(1);
-            }
-
-        }
-
-        .readMore {
-            display: none;
-        }
-
-        .hideResult {
-            display: none;
-        }
-
-
-        .show {
-            display: block;
-        }
-
-        .base {
-
-            display: none;
-
-        }
+      .show {
+        display: block;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
-
-    <header>
-
-    </header>
+  <body>
+    <header></header>
 
     <main>
+      <section>
+        <div class="container d-flex align-items-center">
+          <div class="w-100">
+            <div class="topPart">
+              <div class="d-flex align-items-center justify-content-center">
+                <img
+                  src="https://cdn.discordapp.com/attachments/1040547615881830410/1044967707117883432/image_4.png"
+                  alt=""
+                />
+              </div>
 
-        <section>
+              <div
+                class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4 position-relative"
+              >
+                <input type="text" class="search w-100 form-control" />
+                <select class="selectType w-25 form-select">
+                  <option value="planets">Planeter</option>
+                  <option value="people">Personer</option>
+                </select>
+                <button class="searchBtn btn btn-primary w-25">Sök</button>
 
-            <div class="container d-flex align-items-center">
-
-                <div class="w-100">
-
-                    <div class="topPart">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img src="https://cdn.discordapp.com/attachments/1040547615881830410/1044967707117883432/image_4.png"
-                                alt="">
-                        </div>
-
-                        <div
-                            class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4 position-relative">
-                            <input type="text" class="search w-100 form-control">
-                            <select class="selectType w-25 form-select">
-                                <option value="planets">Planeter</option>
-                                <option value="people">Personer</option>
-                            </select>
-                            <button class="searchBtn btn btn-primary w-25">Sök</button>
-
-                            <div class="alertArea">
-
-                            </div>
-                            <div class="alert error bg-danger text-white rounded-2 mt-4 alert-dismissible fade d-flex gap-2 align-items-center"
-                                name="error">
-
-                                <h4 class="type"></h4><span class="title"></span><span class="description"></span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="results mt-4 bg-light p-4 rounded-2">
-
-                        <nav aria-label="...">
-
-                            <div class="base">
-                                <!-- <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li> -->
-
-                                <li class="page-item active link" aria-current="page">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                            </div>
-                            
-                            <ul class="pagination">
-
-                                <!-- <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li> -->
-                            </ul>
-                        </nav>
-
-                        <div class="resultRow">
-                            <div class="d-flex align-items-center rounded-2 p-2 justify-content-between">
-
-                                <span class="id" id="id">ID</span>
-                                <span class="w-25" class="name" id="name">Namn</span>
-                                <span class="w-25" class="gender" id="gender">Gender</span>
-                                <!-- <span class="w-25">Melonas</span> -->
-                                <button class="read btn btn-primary">Read more</button>
-
-                            </div>
-                        </div>
-
-                        <div class="result d-flex flex-column gap-4">
-
-                        </div>
-
-                        <div class="readMore">
-                            <div class="bg-dark text-white">
-                                <span class="nameMore">Name</span>
-                                <span class="genderMore">Gender</span>
-                                <span class="hair">Hair color</span>
-                                <span class="skin">Skin color</span>
-                                <span>Eye color</span>
-                                <span>Birth year</span>
-                                <span>Mass</span>
-                                <span>Home</span>
-                                <span>Another thing</span>
-                                <button id="backToSearch">Back To Search</button>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="loading">
-                            <div class="d-flex justify-content-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+                <div class="alertArea"></div>
+                <div
+                  class="alert error bg-danger text-white rounded-2 mt-4 alert-dismissible fade d-flex gap-2 align-items-center"
+                  name="error"
+                >
+                  <h4 class="type"></h4>
+                  <span class="title"></span><span class="description"></span>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
                 </div>
-
+              </div>
             </div>
 
+            <div class="results mt-4 bg-light p-4 rounded-2">
+              <nav aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a
+                      class="page-link"
+                      href="#"
+                      tabindex="-1"
+                      aria-disabled="true"
+                      >Previous</a
+                    >
+                  </li>
 
-        </section>
+                  <li class="page-item active link" aria-current="page">
+                    <a class="page-link" href="#">1</a>
+                  </li>
 
+                  <!-- <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li> -->
+                </ul>
+              </nav>
+
+              <div class="resultRow">
+                <div
+                  class="d-flex align-items-center rounded-2 p-2 justify-content-between"
+                >
+                  <span class="id" id="id">ID</span>
+                  <span class="w-25" class="name" id="name">Namn</span>
+                  <span class="w-25" class="gender" id="gender">Gender</span>
+                  <!-- <span class="w-25">Melonas</span> -->
+                  <button class="read btn btn-primary">Read more</button>
+                </div>
+              </div>
+
+              <div class="result d-flex flex-column gap-4"></div>
+
+              <div class="readMore container text-center">
+                <div
+                  class="d-flex align-items-center rounded-2 p-2 justify-content-between"
+                >
+                  <div class="row">
+                    <span class="nameMore" class="col">Name</span>
+                    <span class="genderMore" class="col">Gender</span>
+                    <span class="hair" class="col">Hair color</span>
+                  </div>
+                  <div class="row">
+                    <span class="height" class="col">Heigth</span>
+                    <span class="skin" class="col">Skin color</span>
+                    <span class="eye" class="col">Eye color</span>
+                  </div>
+                  <div class="row">
+                    <span class="birth" class="col">Birth year</span>
+                    <span class="mass" class="col">Mass</span>
+                    <span class="home" class="col">Home</span>
+                  </div>
+                  <a href="" class="href">Another thing</a>
+                  <button id="backToSearch" class="btn btn-primary w-15">
+                    Back To Search
+                  </button>
+                </div>
+              </div>
+
+              <div class="loading">
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="fixed-bottom text-white-50 p-2 text-center">
-
-        Made by Jenny, Simon, Ebba, Benjamin
-
+      Made by Jenny, Simon, Ebba, Benjamin
     </footer>
 
     <script src="js/main.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
