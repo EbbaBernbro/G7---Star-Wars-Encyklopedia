@@ -15,7 +15,7 @@ export function renderData(data) {
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
   let cookie = document.cookie;
   cookie = resultTag;
-  resultTag.innerHTML = "";
+  //resultTag.innerHTML = "";
   setPagination(data.count);
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1);
@@ -81,7 +81,7 @@ export function renderData(data) {
     });
     resultTag.appendChild(clone);
     console.log(latestResult);
-    console.log(cookie)
+    console.log("Cookie right here: " + cookie)
   }
 }
 
