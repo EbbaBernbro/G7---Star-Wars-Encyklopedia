@@ -11,8 +11,23 @@ import * as api from './apiRequests.js';
 import * as errorHandler from './errorHandler.js';
 
 const btnToSearch = document.querySelector(".searchBtn");
+const result = document.querySelector(".results");
+let searchPlace = document.querySelector(".topPart");
+let spinner = document.querySelector(".loading");
+
+let listView = document.querySelector(".listView");
+let readMore = document.querySelector(".readMore");
 export function getValueOnClick() {
+
   btnToSearch.addEventListener("click", () => {
+
+    readMore.classList.remove("show");
+    listView.classList.add("hide");
+    spinner.classList.remove("hide");
+    
+    result.classList.add("anim");
+    searchPlace.classList.add("animSearch");
+
     let value = document.querySelector(".search").value;
 
     if(value == ""){
