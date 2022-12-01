@@ -108,6 +108,12 @@ export function renderData(data, searchString, category) {
 
   }
 }
+// loop som tar bort alla divar i result
+function clearResults(input) {   
+  for (let i = 0; i < input.length; i++) {
+      input[i].remove();
+  }    
+}
 
 function setPagination(id, searchString, category) {
   let number = id / 10;
