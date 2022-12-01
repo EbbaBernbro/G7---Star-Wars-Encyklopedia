@@ -38,6 +38,7 @@ export function renderData(data, searchString, category) {
 
     const name1 = data.results[i].key1;
     const gender1 = data.results[i].key2;
+    
 
     console.log(name1);
     console.log(gender1);
