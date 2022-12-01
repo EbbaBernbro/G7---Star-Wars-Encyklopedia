@@ -10,7 +10,7 @@ import * as api from './apiRequests.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents"];
+let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents", "characters", "planets", "people"];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {

@@ -158,6 +158,13 @@
     .hide {
       display: none;
     }
+
+    .details{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 30px;
+      gap: 30px;
+    }
   </style>
 </head>
 
@@ -177,8 +184,9 @@
             <div
               class="d-flex align-items-center justify-content-center gap-2 bg-light p-4 rounded-2 mt-4 position-relative">
               <input type="text" class="search w-100 form-control" />
-              <select id="dropdown" class="selectType w-25 form-select">
-                
+              <select class="selectType w-25 form-select" id="dropdown">
+                <!-- <option value="planets">Planeter</option>
+                <option value="people">Personer</option> -->
               </select>
               <button class="searchBtn btn btn-primary w-25">Sök</button>
 
@@ -227,12 +235,12 @@
               </div>
             </div>
 
-            <div class="readMore container text-center">
-              <div class="d-flex align-items-center rounded-2 p-2 justify-content-between">
-                <div class="details d-flex gap-2 flex-column">
+            <div class="readMore">
+              <div class="">
+                <div class="details">
 
                 </div>
-                <a href="" class="href">Another thing</a>
+                <!-- <a href="" class="href">Another thing</a> -->
                 <button id="backToSearch" class="btn btn-primary w-15">
                   Back To Search
                 </button>
