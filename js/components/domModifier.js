@@ -6,11 +6,21 @@
 /*Användaren skriver något i sökrutan och klickar på knappen sök. buttonHandler tar det värdet och skickar till apiRequest som
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
-import * as api from './apiRequests.js';
+import * as api from "./apiRequests.js";
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents"];
+let filter = [
+  "films",
+  "homeworld",
+  "vehicles",
+  "starships",
+  "created",
+  "edited",
+  "url",
+  "species",
+  "residents",
+];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {
@@ -19,15 +29,14 @@ export function renderData(data, searchString, category) {
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
-  
-  
+
   resultTag.innerHTML = "";
-  setPagination(data.count, searchString, category);//.count gets number of array lists i result object
+  setPagination(data.count, searchString, category); //.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1); //
     const name = data.results[i].name;
     const gender = data.results[i].gender;
-  
+    console.log("This is the id och match: " + id);
     let result = document.querySelector(".resultRow");
 
     let clone = result.cloneNode(true);
@@ -51,61 +60,43 @@ export function renderData(data, searchString, category) {
       tag.classList.add("hide");
 
       let readMore = document.querySelector(".readMore");
-      
+
       readMore.classList.remove("hide");
       readMore.classList.add("show");
-
 
       let resultData = getResultId(this.getAttribute("data"));
 
       let details = document.querySelector(".details");
       details.innerHTML = "";
 
-      Object.entries(resultData).forEach(entry => {
-        
+      Object.entries(resultData).forEach((entry) => {
         let [key, value] = entry;
         console.log(key + " " + value);
 
-        for(let i = 0; i < filter.length; i++){
-
-          if(key == filter[i]){
-
+        for (let i = 0; i < filter.length; i++) {
+          if (key == filter[i]) {
             return false;
-
           }
-
         }
 
         key = key.replace("_", " ");
         key = key.charAt(0).toUpperCase() + key.slice(1);
 
-        
         let newElement = document.createElement("span");
         newElement.innerHTML = key + ": " + value;
 
         details.appendChild(newElement);
-
       });
 
-
-      
-
-     
-
-
-    
       let returnButton = document.querySelector("#backToSearch");
       returnButton.addEventListener("click", () => {
-
         readMore.classList.add("hide");
         tag.classList.remove("hide");
         tag.classList.add("show");
-
       });
     });
 
     resultTag.appendChild(clone);
-
   }
 }
 
@@ -124,15 +115,11 @@ function setPagination(id, searchString, category) {
   pagination.appendChild(firstItem);
 
   for (let i = 0; i < number; i++) {
-
     let newRow = pageItem.cloneNode(true);
 
     if (i > 0) {
-
       newRow.classList.remove("active");
-
     }
-
 
     let link = newRow.querySelector("a");
     link.innerHTML = i + 1;
@@ -143,13 +130,10 @@ function setPagination(id, searchString, category) {
   let allItem = document.querySelectorAll(".page-item");
 
   for (let i = 0; i < allItem.length; i++) {
-
     allItem[i].addEventListener("click", function () {
-
       api.getData(searchString, category, this.querySelector("a").innerHTML);
       this.classList.add("active");
-
-    })
+    });
   }
 }
 
@@ -163,3 +147,17 @@ function getResultId(checkId) {
   }
 }
 
+// function hideShow(some){
+//    if(some == classList.remove("hide")){
+
+//    } 
+   
+//    if (some == classList.add("show")){
+
+//    }
+   
+//    if (some == classList.add("hide")){
+
+//   }
+//   if (some == classList.add("show"))
+// }
