@@ -10,7 +10,7 @@ import * as api from './apiRequests.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents"];
+let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents", "characters", "planets", "people"];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {
@@ -107,6 +107,12 @@ export function renderData(data, searchString, category) {
     resultTag.appendChild(clone);
 
   }
+}
+// loop som tar bort alla divar i result
+function clearResults(input) {   
+  for (let i = 0; i < input.length; i++) {
+      input[i].remove();
+  }    
 }
 
 function setPagination(id, searchString, category) {
