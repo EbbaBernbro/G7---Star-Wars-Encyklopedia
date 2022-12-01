@@ -7,6 +7,7 @@
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
 import * as api from './apiRequests.js';
+import * as errorHandler from './errorHandler.js';
 
 let latestResult = [];
 
@@ -155,7 +156,7 @@ function setPagination(id, searchString, category) {
   nextLink.innerHTML = "Next";
 
   pagination.appendChild(lastItem);
-  
+
   let allItem = document.querySelectorAll(".page-item");
 
   for (let i = 0; i < allItem.length; i++) {
@@ -174,9 +175,15 @@ function setPagination(id, searchString, category) {
 
       if (text.innerHTML == "Previous") {
 
-        let currPage = latestResult.next.split("=").splice(-1, 1);
+        if (latestResult.previous) {
+          let currPage = latestResult.next.split("=").splice(-1, 1);
 
-        api.getData(searchString, category, currPage.toString() - 2);
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString() - 2);
+
+        }
 
         return false;
 
@@ -184,9 +191,16 @@ function setPagination(id, searchString, category) {
 
       if (text.innerHTML == "Next") {
 
-        let currPage = latestResult.next.split("=").splice(-1, 1);
+        if (latestResult.next) {
 
-        api.getData(searchString, category, currPage.toString());
+          let currPage = latestResult.next.split("=").splice(-1, 1);
+
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString());
+
+        }
 
         return false;
 
