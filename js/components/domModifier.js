@@ -7,6 +7,7 @@
 i sin tur skickar ett objekt via en funktion till domModifier(mig). domModifier skapar funktion*/
 
 import * as api from './apiRequests.js';
+import * as errorHandler from './errorHandler.js';
 
 let latestResult = [];
 
@@ -53,6 +54,8 @@ export function renderData(data, searchString, category) {
 
     cloneButton.addEventListener("click", function () {
       let tag = document.querySelector(".listView");
+      console.log(id)
+      // id.append(tag)
 
       tag.classList.remove("show");
       tag.classList.add("hide");
@@ -62,7 +65,7 @@ export function renderData(data, searchString, category) {
       readMore.classList.remove("hide");
       readMore.classList.add("show");
 
-
+      console.log(id);
       let resultData = getResultId(this.getAttribute("data"));
 
       let details = document.querySelector(".details");
@@ -96,6 +99,7 @@ export function renderData(data, searchString, category) {
 
         details.appendChild(newElement);
 
+
       });
 
 
@@ -126,6 +130,7 @@ function clearResults(input) {
   }
 }
 
+
 function setPagination(id, searchString, category) {
   let number = id / 10;
   let pagination = document.querySelector(".pagination");
@@ -142,6 +147,12 @@ function setPagination(id, searchString, category) {
   pagination.appendChild(firstItem);
 
 
+  let lastItem = pageItem.cloneNode(true);
+  let nextLink = lastItem.querySelector("a");
+
+  let allItem = document.querySelectorAll(".page-item");
+  let itemLink = document.querySelectorAll(".page-item > a");
+
   for (let i = 0; i < number; i++) {
 
     let newRow = pageItem.cloneNode(true);
@@ -157,64 +168,108 @@ function setPagination(id, searchString, category) {
     link.innerHTML = i + 1;
 
     pagination.appendChild(newRow);
-  }
 
-  let lastItem = pageItem.cloneNode(true);
-  let nextLink = lastItem.querySelector("a");
+  }
 
   lastItem.classList.remove("active");
   nextLink.innerHTML = "Next";
 
   pagination.appendChild(lastItem);
-  
-  let allItem = document.querySelectorAll(".page-item");
+
+
+  for (let i = 0; i < itemLink.length; i++) {
+
+    if (itemLink[i].innerHTML == "Previous") {
+      if (!latestResult.previous) {
+        itemLink[i].classList.add("disabled");
+
+      }
+    }
+
+    if (itemLink[i].innerHTML == "Next") {
+
+      if (!latestResult.next) {
+        itemLink[i].classList.add("disabled");
+      }
+    }
+  }
 
   for (let i = 0; i < allItem.length; i++) {
 
+    let link = allItem[i].querySelector("a");
+    let currPageIndex = latestResult.next.split("=").splice(-1, 1);
+    currPageIndex = Number(currPageIndex);
+    if (link.innerHTML == currPageIndex - 1) {
+
+      allItem[i].classList.add("active");
+
+    } else {
+
+      allItem[i].classList.remove("active");
+
+    }
+
     allItem[i].addEventListener("click", function (e) {
+
+      e.preventDefault();
 
       let spinner = document.querySelector(".loading");
       spinner.classList.remove("hide");
 
       let results = document.querySelector(".result");
       results.innerHTML = "";
-      e.preventDefault();
 
       let text = this.querySelector("a");
 
+      handlePrevious();
 
-      if (text.innerHTML == "Previous") {
-
-        let currPage = latestResult.next.split("=").splice(-1, 1);
-
-        api.getData(searchString, category, currPage.toString() - 2);
-
-        return false;
-
-      }
-
-      if (text.innerHTML == "Next") {
-
-        let currPage = latestResult.next.split("=").splice(-1, 1);
-
-        api.getData(searchString, category, currPage.toString());
-
-        return false;
-
-      }
+      handleNext();
 
       api.getData(searchString, category, this.querySelector("a").innerHTML);
-      this.classList.add("active");
-
-
-
-
-
 
     })
   }
 }
 
+function handlePrevious(type) {
+
+  if (text.innerHTML == "Previous") {
+
+    if (latestResult.previous) {
+      let currPage = latestResult.next.split("=").splice(-1, 1);
+
+      if (currPage == null || latestResult.next == null) {
+        errorHandler.newError("error", "", "Inga fler sidor");
+      }
+      api.getData(searchString, category, currPage.toString() - 2);
+
+    }
+
+    return false;
+
+  }
+
+}
+function handleNext(type) {
+
+  if (text.innerHTML == "Next") {
+
+    if (latestResult.next) {
+
+      let currPage = latestResult.next.split("=").splice(-1, 1);
+
+      if (currPage == null || latestResult.next == null) {
+        errorHandler.newError("error", "", "Inga fler sidor");
+      }
+      api.getData(searchString, category, currPage.toString());
+
+    }
+
+    return false;
+
+  }
+
+}
 function getResultId(checkId) {
   for (let i = 0; i < latestResult.results.length; i++) {
     const id = latestResult.results[i].url.split("/").splice(-2, 1);
@@ -224,4 +279,3 @@ function getResultId(checkId) {
     }
   }
 }
-
