@@ -42,7 +42,7 @@ export async function getData(id, subject, page) {
     if(!page){
          page = 1;
     }
-    const url = `${baseUrl}${subject}/?search=${id}`;
+    const url = `${baseUrl}${subject}/?search=${id}&page=${page}`;
     await fetchApi(url)
         .then(response => {
            

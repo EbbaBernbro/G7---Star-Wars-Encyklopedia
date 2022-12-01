@@ -19,8 +19,8 @@ export function renderData(data, searchString, category) {
   // console.log("Got: " + data.results.length + " matches");
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
-  
-  
+
+
   resultTag.innerHTML = "";
   setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
@@ -65,7 +65,7 @@ export function renderData(data, searchString, category) {
       tag.classList.add("hide");
 
       let readMore = document.querySelector(".readMore");
-      
+
       readMore.classList.remove("hide");
       readMore.classList.add("show");
 
@@ -80,13 +80,13 @@ export function renderData(data, searchString, category) {
       details.appendChild(idInDetail);
     
       Object.entries(resultData).forEach(entry => {
-        
+
         let [key, value] = entry;
         console.log(key + " " + value);
 
-        for(let i = 0; i < filter.length; i++){
+        for (let i = 0; i < filter.length; i++) {
 
-          if(key == filter[i]){
+          if (key == filter[i]) {
 
             return false;
 
@@ -108,12 +108,12 @@ export function renderData(data, searchString, category) {
       });
 
 
-      
-
-     
 
 
-    
+
+
+
+
       let returnButton = document.querySelector("#backToSearch");
       returnButton.addEventListener("click", () => {
 
@@ -129,10 +129,10 @@ export function renderData(data, searchString, category) {
   }
 }
 // loop som tar bort alla divar i result
-function clearResults(input) {   
+function clearResults(input) {
   for (let i = 0; i < input.length; i++) {
-      input[i].remove();
-  }    
+    input[i].remove();
+  }
 }
 
 function setPagination(id, searchString, category) {
@@ -147,7 +147,9 @@ function setPagination(id, searchString, category) {
 
   firstItem.classList.remove("active");
   previousLink.innerHTML = "Previous";
+
   pagination.appendChild(firstItem);
+
 
   for (let i = 0; i < number; i++) {
 
@@ -166,14 +168,57 @@ function setPagination(id, searchString, category) {
     pagination.appendChild(newRow);
   }
 
+  let lastItem = pageItem.cloneNode(true);
+  let nextLink = lastItem.querySelector("a");
+
+  lastItem.classList.remove("active");
+  nextLink.innerHTML = "Next";
+
+  pagination.appendChild(lastItem);
+  
   let allItem = document.querySelectorAll(".page-item");
 
   for (let i = 0; i < allItem.length; i++) {
 
-    allItem[i].addEventListener("click", function () {
+    allItem[i].addEventListener("click", function (e) {
+
+      let spinner = document.querySelector(".loading");
+      spinner.classList.remove("hide");
+
+      let results = document.querySelector(".result");
+      results.innerHTML = "";
+      e.preventDefault();
+
+      let text = this.querySelector("a");
+
+
+      if (text.innerHTML == "Previous") {
+
+        let currPage = latestResult.next.split("=").splice(-1, 1);
+
+        api.getData(searchString, category, currPage.toString() - 2);
+
+        return false;
+
+      }
+
+      if (text.innerHTML == "Next") {
+
+        let currPage = latestResult.next.split("=").splice(-1, 1);
+
+        api.getData(searchString, category, currPage.toString());
+
+        return false;
+
+      }
 
       api.getData(searchString, category, this.querySelector("a").innerHTML);
       this.classList.add("active");
+
+
+
+
+
 
     })
   }
