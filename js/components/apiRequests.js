@@ -52,7 +52,7 @@ export async function getData(id, subject, page) {
                 spinner.classList.add("hide");
                 domModifier.renderData(response, id, subject);
                 
-            }, 2000);
+            }, 400);
             
 
         });
