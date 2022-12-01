@@ -25,23 +25,19 @@ export function renderData(data, searchString, category) {
   setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1); //
-    // const name = data.results[i].name;
-    // const gender = data.results[i].gender;
-    // console.log(name)
-    // console.log(gender)
-    // console.log(data.results)
+    
     let firstPostion = data.results[i];
 
-    const key1 = Object.key(firstPosition)[0];
-    const key2 = Object.key(firstPosition)[1];
+    let key1 = Object.keys(firstPostion)[0];
+    let key2 = Object.keys(firstPostion)[1];
+    key1 = key1.charAt(0).toUpperCase() + key1.slice(1);
+    key2 = key2.charAt(0).toUpperCase() + key2.slice(1);
 
     const value1 = Object.values(firstPostion)[0];
     const value2 = Object.values(firstPostion)[1];
-     
-    console.log("-----------");
-    console.log(key1);
-    console.log(key2);
-    
+  
+
+
     let result = document.querySelector(".resultRow");
 
     let clone = result.cloneNode(true);
@@ -52,9 +48,11 @@ export function renderData(data, searchString, category) {
     let nameField = clone.querySelector("#name");
     let genderField = clone.querySelector("#gender");
 
-    idField.innerHTML = id;
+    idField.innerHTML = `ID: ${id}`;
     nameField.innerHTML = `${key1} : ${value1}`;
     genderField.innerHTML = `${key2} : ${value2}`;
+    // nameField.innerHTML = value1;
+    // genderField.innerHTML = value2;
 
     cloneButton.setAttribute("data", id);
 
