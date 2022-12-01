@@ -11,7 +11,7 @@ import * as errorHandler from './errorHandler.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents", "characters", "planets", "people"];
+let filter = ["films", "homeworld", "vehicles", "starships", "edited", "url", "species", "residents", "characters", "planets", "people"];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {
@@ -40,13 +40,15 @@ export function renderData(data, searchString, category) {
     let genderField = clone.querySelector("#gender");
 
     idField.innerHTML = id;
-    nameField.innerHTML = name;
-    genderField.innerHTML = gender;
+    nameField.innerHTML = `${key1} : ${value1}`;
+    genderField.innerHTML = `${key2} : ${value2}`;
 
     cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
       let tag = document.querySelector(".listView");
+      console.log(id)
+      // id.append(tag)
 
       tag.classList.remove("show");
       tag.classList.add("hide");
@@ -56,12 +58,16 @@ export function renderData(data, searchString, category) {
       readMore.classList.remove("hide");
       readMore.classList.add("show");
 
-
+      console.log(id);
       let resultData = getResultId(this.getAttribute("data"));
 
       let details = document.querySelector(".details");
       details.innerHTML = "";
 
+      let idInDetail = document.createElement("span");
+      idInDetail.innerHTML = "ID: " + id
+      details.appendChild(idInDetail);
+    
       Object.entries(resultData).forEach(entry => {
 
         let [key, value] = entry;
@@ -85,6 +91,7 @@ export function renderData(data, searchString, category) {
         newElement.innerHTML = key + ": " + value;
 
         details.appendChild(newElement);
+
 
       });
 
