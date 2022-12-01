@@ -150,8 +150,6 @@ function setPagination(id, searchString, category) {
   let lastItem = pageItem.cloneNode(true);
   let nextLink = lastItem.querySelector("a");
 
-  let allItem = document.querySelectorAll(".page-item");
-  let itemLink = document.querySelectorAll(".page-item > a");
 
   for (let i = 0; i < number; i++) {
 
@@ -171,6 +169,9 @@ function setPagination(id, searchString, category) {
 
   }
 
+  let allItem = document.querySelectorAll(".page-item");
+  let itemLink = document.querySelectorAll(".page-item > a");
+  
   lastItem.classList.remove("active");
   nextLink.innerHTML = "Next";
 
@@ -221,9 +222,38 @@ function setPagination(id, searchString, category) {
 
       let text = this.querySelector("a");
 
-      handlePrevious();
+      if (text.innerHTML == "Previous") {
 
-      handleNext();
+        if (latestResult.previous) {
+          let currPage = latestResult.next.split("=").splice(-1, 1);
+    
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString() - 2);
+    
+        }
+    
+        return false;
+    
+      }
+
+      if (text.innerHTML == "Next") {
+
+        if (latestResult.next) {
+    
+          let currPage = latestResult.next.split("=").splice(-1, 1);
+    
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString());
+    
+        }
+    
+        return false;
+    
+      }
 
       api.getData(searchString, category, this.querySelector("a").innerHTML);
 
