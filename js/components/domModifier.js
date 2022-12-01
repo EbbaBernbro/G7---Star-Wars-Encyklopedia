@@ -10,7 +10,7 @@ import * as api from './apiRequests.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents", "characters", "planets", "people"];
+let filter = ["films", "homeworld", "vehicles", "starships", "edited", "url", "species", "residents", "characters", "planets", "people"];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {
@@ -78,6 +78,7 @@ export function renderData(data, searchString, category) {
 
         key = key.replace("_", " ");
         key = key.charAt(0).toUpperCase() + key.slice(1);
+        
 
         
         let newElement = document.createElement("span");
