@@ -25,8 +25,23 @@ export function renderData(data, searchString, category) {
   setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1); //
-    const name = data.results[i].name;
-    const gender = data.results[i].gender;
+    // const name = data.results[i].name;
+    // const gender = data.results[i].gender;
+    // console.log(name)
+    // console.log(gender)
+    // console.log(data.results)
+    let firstPostion = data.results[0]
+    const key1 = Object.keys(firstPostion)[0];
+    const key2 = Object.keys(firstPostion)[1];
+    console.log(key1);
+    console.log(key2);
+
+    const name1 = data.results[i].key1;
+    const gender1 = data.results[i].key2;
+
+    console.log(name1);
+    console.log(gender1);
+    
   
     let result = document.querySelector(".resultRow");
 
@@ -39,13 +54,15 @@ export function renderData(data, searchString, category) {
     let genderField = clone.querySelector("#gender");
 
     idField.innerHTML = id;
-    nameField.innerHTML = name;
-    genderField.innerHTML = gender;
+    nameField.innerHTML = name1;
+    genderField.innerHTML = gender1;
 
     cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
       let tag = document.querySelector(".listView");
+      console.log(id)
+      // id.append(tag)
 
       tag.classList.remove("show");
       tag.classList.add("hide");
@@ -55,12 +72,16 @@ export function renderData(data, searchString, category) {
       readMore.classList.remove("hide");
       readMore.classList.add("show");
 
-
+      console.log(id);
       let resultData = getResultId(this.getAttribute("data"));
 
       let details = document.querySelector(".details");
       details.innerHTML = "";
 
+      let idInDetail = document.createElement("span");
+      idInDetail.innerHTML = "ID: " + id
+      details.appendChild(idInDetail);
+    
       Object.entries(resultData).forEach(entry => {
         
         let [key, value] = entry;
@@ -85,6 +106,7 @@ export function renderData(data, searchString, category) {
         newElement.innerHTML = key + ": " + value;
 
         details.appendChild(newElement);
+
 
       });
 
