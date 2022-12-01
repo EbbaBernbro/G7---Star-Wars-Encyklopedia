@@ -21,9 +21,9 @@ export function renderData(data, searchString, category) {
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
 
-
+alert("banan");
   resultTag.innerHTML = "";
-  setPagination(data.count, searchString, category);//.count gets number of array lists i result object
+  
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1); //
     const name = data.results[i].name;
@@ -46,6 +46,7 @@ export function renderData(data, searchString, category) {
     cloneButton.setAttribute("data", id);
 
     cloneButton.addEventListener("click", function () {
+      alert("a");
       let tag = document.querySelector(".listView");
 
       tag.classList.remove("show");
@@ -97,7 +98,7 @@ export function renderData(data, searchString, category) {
 
       let returnButton = document.querySelector("#backToSearch");
       returnButton.addEventListener("click", () => {
-
+        alert("b");
         readMore.classList.add("hide");
         tag.classList.remove("hide");
         tag.classList.add("show");
@@ -107,6 +108,7 @@ export function renderData(data, searchString, category) {
 
     resultTag.appendChild(clone);
 
+    setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   }
 }
 // loop som tar bort alla divar i result
@@ -118,6 +120,7 @@ function clearResults(input) {
 
 
 function setPagination(id, searchString, category) {
+  
   let number = id / 10;
   let pagination = document.querySelector(".pagination");
 
@@ -135,9 +138,6 @@ function setPagination(id, searchString, category) {
 
   let lastItem = pageItem.cloneNode(true);
   let nextLink = lastItem.querySelector("a");
-
-  let allItem = document.querySelectorAll(".page-item");
-  let itemLink = document.querySelectorAll(".page-item > a");
 
   for (let i = 0; i < number; i++) {
 
@@ -157,6 +157,9 @@ function setPagination(id, searchString, category) {
 
   }
 
+  let allItem = document.querySelectorAll(".page-item");
+  let itemLink = document.querySelectorAll(".page-item > a");
+  
   lastItem.classList.remove("active");
   nextLink.innerHTML = "Next";
 
@@ -182,6 +185,7 @@ function setPagination(id, searchString, category) {
 
   for (let i = 0; i < allItem.length; i++) {
 
+    console.log(i);
     let link = allItem[i].querySelector("a");
     let currPageIndex = latestResult.next.split("=").splice(-1, 1);
     currPageIndex = Number(currPageIndex);
@@ -196,9 +200,8 @@ function setPagination(id, searchString, category) {
     }
 
     allItem[i].addEventListener("click", function (e) {
-
+      
       e.preventDefault();
-
       let spinner = document.querySelector(".loading");
       spinner.classList.remove("hide");
 
@@ -207,9 +210,38 @@ function setPagination(id, searchString, category) {
 
       let text = this.querySelector("a");
 
-      handlePrevious();
+      if (text.innerHTML == "Previous") {
 
-      handleNext();
+        if (latestResult.previous) {
+          let currPage = latestResult.next.split("=").splice(-1, 1);
+    
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString() - 2);
+    
+        }
+    
+        return false;
+    
+      }
+
+      if (text.innerHTML == "Next") {
+
+        if (latestResult.next) {
+    
+          let currPage = latestResult.next.split("=").splice(-1, 1);
+    
+          if (currPage == null || latestResult.next == null) {
+            errorHandler.newError("error", "", "Inga fler sidor");
+          }
+          api.getData(searchString, category, currPage.toString());
+    
+        }
+    
+        return false;
+    
+      }
 
       api.getData(searchString, category, this.querySelector("a").innerHTML);
 
