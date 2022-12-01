@@ -10,7 +10,7 @@ import * as api from './apiRequests.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "created", "edited", "url", "species", "residents", "characters", "planets", "people"];
+let filter = ["films", "homeworld", "vehicles", "starships", "edited", "url", "species", "residents", "characters", "planets", "people"];
 let listView = document.querySelector(".listView");
 
 export function renderData(data, searchString, category) {
@@ -25,8 +25,15 @@ export function renderData(data, searchString, category) {
   setPagination(data.count, searchString, category);//.count gets number of array lists i result object
   for (let i = 0; i < data.results.length; i++) {
     const id = data.results[i].url.split("/").splice(-2, 1); //
-    const name = data.results[i].name;
-    const gender = data.results[i].gender;
+    let firstPostion = data.results[i];
+
+    let key1 = Object.keys(firstPostion)[0];
+    let key2 = Object.keys(firstPostion)[1];
+    key1 = key1.charAt(0).toUpperCase() + key1.slice(1);
+    key2 = key2.charAt(0).toUpperCase() + key2.slice(1);
+
+    const value1 = Object.values(firstPostion)[0];
+    const value2 = Object.values(firstPostion)[1];
 
     let result = document.querySelector(".resultRow");
 
@@ -38,9 +45,9 @@ export function renderData(data, searchString, category) {
     let nameField = clone.querySelector("#name");
     let genderField = clone.querySelector("#gender");
 
-    idField.innerHTML = id;
-    nameField.innerHTML = name;
-    genderField.innerHTML = gender;
+    idField.innerHTML = `ID: ${id}`;
+    nameField.innerHTML = `${key1} : ${value1}`;
+    genderField.innerHTML = `${key2} : ${value2}`;
 
     cloneButton.setAttribute("data", id);
 
@@ -60,6 +67,10 @@ export function renderData(data, searchString, category) {
 
       let details = document.querySelector(".details");
       details.innerHTML = "";
+
+      let idInDetail = document.createElement("span");
+      idInDetail.innerHTML = "ID: " + id
+      details.appendChild(idInDetail);
 
       Object.entries(resultData).forEach(entry => {
 
