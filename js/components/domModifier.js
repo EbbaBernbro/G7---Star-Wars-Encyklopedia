@@ -30,20 +30,18 @@ export function renderData(data, searchString, category) {
     // console.log(name)
     // console.log(gender)
     // console.log(data.results)
-    let firstPostion = data.results[0]
-    const key1 = Object.keys(firstPostion)[0];
-    const key2 = Object.keys(firstPostion)[1];
+    let firstPostion = data.results[i];
+
+    const key1 = Object.key(firstPosition)[0];
+    const key2 = Object.key(firstPosition)[1];
+
+    const value1 = Object.values(firstPostion)[0];
+    const value2 = Object.values(firstPostion)[1];
+     
+    console.log("-----------");
     console.log(key1);
     console.log(key2);
-
-    const name1 = data.results[i].key1;
-    const gender1 = data.results[i].key2;
     
-
-    console.log(name1);
-    console.log(gender1);
-    
-  
     let result = document.querySelector(".resultRow");
 
     let clone = result.cloneNode(true);
@@ -55,8 +53,8 @@ export function renderData(data, searchString, category) {
     let genderField = clone.querySelector("#gender");
 
     idField.innerHTML = id;
-    nameField.innerHTML = name1;
-    genderField.innerHTML = gender1;
+    nameField.innerHTML = `${key1} : ${value1}`;
+    genderField.innerHTML = `${key2} : ${value2}`;
 
     cloneButton.setAttribute("data", id);
 
