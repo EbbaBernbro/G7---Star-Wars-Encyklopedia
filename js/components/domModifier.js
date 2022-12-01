@@ -148,6 +148,14 @@ function setPagination(id, searchString, category) {
     pagination.appendChild(newRow);
   }
 
+  let lastItem = pageItem.cloneNode(true);
+  let nextLink = lastItem.querySelector("a");
+
+  lastItem.classList.remove("active");
+  nextLink.innerHTML = "Next";
+
+  pagination.appendChild(lastItem);
+  
   let allItem = document.querySelectorAll(".page-item");
 
   for (let i = 0; i < allItem.length; i++) {
@@ -162,18 +170,32 @@ function setPagination(id, searchString, category) {
       e.preventDefault();
 
       let text = this.querySelector("a");
+
+
       if (text.innerHTML == "Previous") {
 
-        let currPage = latestResult.next.split("/").splice(-1, 1);
-        console.log(currPage);
-        api.getData(searchString, category, currPage-1);
+        let currPage = latestResult.next.split("=").splice(-1, 1);
 
-      } else {
+        api.getData(searchString, category, currPage.toString() - 2);
 
-        api.getData(searchString, category, this.querySelector("a").innerHTML);
-        this.classList.add("active");
+        return false;
 
       }
+
+      if (text.innerHTML == "Next") {
+
+        let currPage = latestResult.next.split("=").splice(-1, 1);
+
+        api.getData(searchString, category, currPage.toString());
+
+        return false;
+
+      }
+
+      api.getData(searchString, category, this.querySelector("a").innerHTML);
+      this.classList.add("active");
+
+
 
 
 
