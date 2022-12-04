@@ -21,17 +21,17 @@ export async function fetchApi(url) {
        errorHandler.newError("error", "Api problem", "Något gick fel med api, " + response.status);
     }
 }
-
+//Function thats get the categories to the drop down
 export function categoryFiller(){
-    const dropdown = document.getElementById("dropdown");
-    fetchApi("https://swapi.dev/api/")
-        .then(response => {
-            for (let item in response) {
-                let option = document.createElement("option");
-                dropdown.append(option);
-                let string = item;
-                option.innerText = string.charAt(0).toUpperCase() + string.slice(1);
-                option.value = item;
+    const dropdown = document.getElementById("dropdown"); // Selecting option element
+    fetchApi("https://swapi.dev/api/") // Use predefined API function for async method
+        .then(response => { // Await response
+            for (let item in response) { // For every 
+                let option = document.createElement("option"); // Create a new option element
+                dropdown.append(option); // Append it to the dropdown
+                let string = item; // Store the response item as a variable
+                option.innerText = string.charAt(0).toUpperCase() + string.slice(1); // Set the text of the option to variable and make first letter uppercase
+                option.value = item; // Set value to item name
             }
         })
 }

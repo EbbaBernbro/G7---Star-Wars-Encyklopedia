@@ -1,44 +1,34 @@
-// Tar emot inputs ifrån sidan, skickar de vidare
-// benjamin
-// search api call på apin och apin ska kalla på dom modifier      -    addEventListener skickar request om api data till jenny api sedan skickas det till dommodifier sen läggs det up på sidan
-
-// search
-/*const btnToSearch = document.querySelector(".searchBtn");
-// ska en validerings funktion regex
-
-btnToSearch.addEventListener("click", getData("strängvärde", "subjekt")*/
-import * as api from './apiRequests.js';
+import * as api from './apiRequests.js';                  
 import * as errorHandler from './errorHandler.js';
 
-const btnToSearch = document.querySelector(".searchBtn");
-const result = document.querySelector(".results");
-let searchPlace = document.querySelector(".topPart");
-let spinner = document.querySelector(".loading");
+const btnToSearch = document.querySelector(".searchBtn");       // use DOM to get out search button to a const
+const result = document.querySelector(".results");              // use DOM to get out result section to a const
+let searchPlace = document.querySelector(".topPart");           // use DOM to get out top part div to a let
+let spinner = document.querySelector(".loading");               // use DOM to get out loading div in html to a let
+let listView = document.querySelector(".listView");             // use DOM to get listview from html to a let variable
+let readMore = document.querySelector(".readMore");             // use DOM to get readmore section from html to a variable
 
-let listView = document.querySelector(".listView");
-let readMore = document.querySelector(".readMore");
+
+
+
+// function that runs on click, get value from input and option and use in GetData api to make request and if input is empty send a error message.
 export function getValueOnClick() {
-
-  btnToSearch.addEventListener("click", () => {
-
+  btnToSearch.addEventListener("click", () => {                     // on btnToSearch click using addEventListener
     readMore.classList.remove("show");
     listView.classList.add("hide");
     spinner.classList.remove("hide");
-    
     result.classList.add("anim");
     searchPlace.classList.add("animSearch");
 
-    let value = document.querySelector(".search").value;
+    let value = document.querySelector(".search").value;            // value from input and put in a variable named value
 
-    if(value == ""){
-
+    if(value == ""){                                                // if value is empty, display a error message
+ 
       errorHandler.newError("Fel", "Felaktig inmatning", "Skriv in rätt värde");
 
     }
-    console.log(value);
-    let subject = document.querySelector(".selectType").value
-    console.log(subject)
-    api.getData(value, subject, null)
+    let subject = document.querySelector(".selectType").value      // value from select and put in a variable 
+    api.getData(value, subject, null)                              // api request uses value and subject variabels
   });
 }
 getValueOnClick();

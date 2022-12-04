@@ -11,13 +11,13 @@ import * as errorHandler from './errorHandler.js';
 
 let latestResult = [];
 
-let filter = ["films", "homeworld", "vehicles", "starships", "edited", "url", "species", "residents", "characters", "planets", "people"];
-let listView = document.querySelector(".listView");
+let filter = ["films", "homeworld", "vehicles", "starships", "edited", "url", "species", "residents", "characters", "planets", "people"];      
+let listView = document.querySelector(".listView");      // use DOM to get listView section to a variable
 
 export function renderData(data, searchString, category) {
   listView.classList.remove("hide");
   latestResult = data;
-  // console.log("Got: " + data.results.length + " matches");
+ 
   //Find the contatiner element where we want to attach everything
   const resultTag = document.querySelector(".result"); //Ex. variable name, ID - quote-ist
 
@@ -25,20 +25,20 @@ alert("banan");
   resultTag.innerHTML = "";
   
   for (let i = 0; i < data.results.length; i++) {
-    const id = data.results[i].url.split("/").splice(-2, 1); //
-    let firstPostion = data.results[i];
-
-    let key1 = Object.keys(firstPostion)[0];
-    let key2 = Object.keys(firstPostion)[1];
+    const id = data.results[i].url.split("/").splice(-2, 1); // get the ID of the search value
+    let firstPostion = data.results[i];        // create a variable named firstPostion and put in data result from the searched object
+    let key1 = Object.keys(firstPostion)[0];   // takes out key from the first index position in the response
+    let key2 = Object.keys(firstPostion)[1];   // takes out key from the second index postion in the responese
     key1 = key1.charAt(0).toUpperCase() + key1.slice(1);
     key2 = key2.charAt(0).toUpperCase() + key2.slice(1);
 
-    const value1 = Object.values(firstPostion)[0];
-    const value2 = Object.values(firstPostion)[1];
+    const value1 = Object.values(firstPostion)[0];    // takes out value from the first index postion in the response
+    const value2 = Object.values(firstPostion)[1];    // takes out value from the second index postion in the response
 
-    let result = document.querySelector(".resultRow");
+    let result = document.querySelector(".resultRow"); // use DOM to get resultRow section to a variable 
 
-    let clone = result.cloneNode(true);
+    //cloneNode() method that returns a copy of the node where the method was called
+    let clone = result.cloneNode(true);               //
     let cloneButton = clone.querySelector("button");
     clone.classList.add("show");
 
@@ -50,7 +50,8 @@ alert("banan");
     nameField.innerHTML = `${key1} : ${value1}`;
     genderField.innerHTML = `${key2} : ${value2}`;
 
-    cloneButton.setAttribute("data", id);
+    //This is our Read more
+    cloneButton.setAttribute("data", id); // Add data attribute to button
 
     cloneButton.addEventListener("click", function () {
       alert("a");
@@ -61,6 +62,7 @@ alert("banan");
       tag.classList.remove("show");
       tag.classList.add("hide");
 
+      //Display read more div when clicked
       let readMore = document.querySelector(".readMore");
 
       readMore.classList.remove("hide");
@@ -102,12 +104,6 @@ alert("banan");
 
 
       });
-
-
-
-
-
-
 
 
       let returnButton = document.querySelector("#backToSearch");
@@ -175,10 +171,6 @@ function setPagination(id, searchString, category) {
   let allItem = document.querySelectorAll(".page-item");
   let itemLink = document.querySelectorAll(".page-item > a");
   
-
-  let allItem = document.querySelectorAll(".page-item");
-  let itemLink = document.querySelectorAll(".page-item > a");
-  
   lastItem.classList.remove("active");
   nextLink.innerHTML = "Next";
 
@@ -237,6 +229,7 @@ function setPagination(id, searchString, category) {
           if (currPage == null || latestResult.next == null) {
             errorHandler.newError("error", "", "Inga fler sidor");
           }
+
           api.getData(searchString, category, currPage.toString() - 2);
     
         }
@@ -302,45 +295,6 @@ function setPagination(id, searchString, category) {
   }
 }
 
-function handlePrevious(type) {
-
-  if (text.innerHTML == "Previous") {
-
-    if (latestResult.previous) {
-      let currPage = latestResult.next.split("=").splice(-1, 1);
-
-      if (currPage == null || latestResult.next == null) {
-        errorHandler.newError("error", "", "Inga fler sidor");
-      }
-      api.getData(searchString, category, currPage.toString() - 2);
-
-    }
-
-    return false;
-
-  }
-
-}
-function handleNext(type) {
-
-  if (text.innerHTML == "Next") {
-
-    if (latestResult.next) {
-
-      let currPage = latestResult.next.split("=").splice(-1, 1);
-
-      if (currPage == null || latestResult.next == null) {
-        errorHandler.newError("error", "", "Inga fler sidor");
-      }
-      api.getData(searchString, category, currPage.toString());
-
-    }
-
-    return false;
-
-  }
-
-}
 function getResultId(checkId) {
   for (let i = 0; i < latestResult.results.length; i++) {
     const id = latestResult.results[i].url.split("/").splice(-2, 1);
