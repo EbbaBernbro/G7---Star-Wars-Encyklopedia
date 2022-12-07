@@ -39,8 +39,8 @@ export function renderData(data, searchString, category) {
     let firstPostion = data.results[i]; // create a variable named firstPostion and put in data result from the searched object
     let key1 = Object.keys(firstPostion)[0]; // takes out key from the first index position in the response
     let key2 = Object.keys(firstPostion)[1]; // takes out key from the second index postion in the responese
-    key1 = key1.charAt(0).toUpperCase() + key1.slice(1);
-    key2 = key2.charAt(0).toUpperCase() + key2.slice(1);
+    key1 = key1.charAt(0).toUpperCase() + key1.slice(1);  // takes out first letter of key1 and makes it capital letter 
+    key2 = key2.charAt(0).toUpperCase() + key2.slice(1); // takes out first letter of key2 and makes it capital letter 
 
     const value1 = Object.values(firstPostion)[0]; // takes out value from the first index postion in the response
     const value2 = Object.values(firstPostion)[1]; // takes out value from the second index postion in the response
@@ -52,16 +52,19 @@ export function renderData(data, searchString, category) {
     let cloneButton = clone.querySelector("button"); //Meaning all these clone. returns a copy of the blue print for result rows
     clone.classList.add("show");
 
-    let idField = clone.querySelector("#id");
+    // create variabel to the cloned for id, name and gender so it can be used later
+    let idField = clone.querySelector("#id");   
     let nameField = clone.querySelector("#name");
     let genderField = clone.querySelector("#gender");
 
+    // using templete string to show id, and the first two position from api and display in result
     idField.innerHTML = `ID: ${id}`;
     nameField.innerHTML = `${key1} : ${value1}`;
     genderField.innerHTML = `${key2} : ${value2}`;
 
     //This is our Read more
     cloneButton.setAttribute("data", id); // Add data attribute to button
+
 
     cloneButton.addEventListener("click", function () {
       let tag = document.querySelector(".listView");
@@ -95,7 +98,7 @@ export function renderData(data, searchString, category) {
           }
         }
 
-        key = key.replace("_", " ");
+        key = key.replace("_", " ");  // take out , and replace with nothing to a more clean result 
         key = key.charAt(0).toUpperCase() + key.slice(1);
 
         let newElement = document.createElement("span");
@@ -104,9 +107,9 @@ export function renderData(data, searchString, category) {
         details.appendChild(newElement);
       });
 
+      // retrun button function on click, hide readmore page and display result again
       let returnButton = document.querySelector("#backToSearch");
       returnButton.addEventListener("click", () => {
-        alert("b");
         readMore.classList.add("hide");
         tag.classList.remove("hide");
         tag.classList.add("show");
