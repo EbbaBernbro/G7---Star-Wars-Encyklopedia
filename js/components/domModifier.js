@@ -92,6 +92,7 @@ export function renderData(data, searchString, category) {
         let [key, value] = entry;
         console.log(key + " " + value);
 
+        //Om objektets namn ingår i filter arrayen som inte ska visas, så returnerar det false och denna rad visas ej.
         for (let i = 0; i < filter.length; i++) {
           if (key == filter[i]) {
             return false;
@@ -99,12 +100,12 @@ export function renderData(data, searchString, category) {
         }
 
         key = key.replace("_", " "); // take out , and replace with nothing to a more clean result
-        key = key.charAt(0).toUpperCase() + key.slice(1);
+        key = key.charAt(0).toUpperCase() + key.slice(1); //Första bokstaven stor
 
-        let newElement = document.createElement("span");
-        newElement.innerHTML = key + ": " + value;
+        let newElement = document.createElement("span"); // Skapa element
+        newElement.innerHTML = key + ": " + value; // Skriv ut vilken rad vi är på och dess data
 
-        details.appendChild(newElement);
+        details.appendChild(newElement); //Append
       });
 
       // retrun button function on click, hide readmore page and display result again
