@@ -2,17 +2,21 @@
 
 import * as errorHandler from './errorHandler.js';
 import * as domModifier from './domModifier.js';
-
+// This function does the actual fetching and returns json
+// Uses try and catch to catch errors
+// Uses await to wait for a response before the code continues..
 export async function fetchApi(url) {
     try {
         const response = await fetch(url);
-        if (response.ok) {            
+        if (response.ok) {   
+             //.json makes it an object that can be handled in javascript .json is asynchronous         
             const jsonResponse = await response.json();
             console.log(jsonResponse)    
             if(jsonResponse.results && jsonResponse.results.length == 0){   
                 errorHandler.newError("Fel", "", "Hittade inget");    
             } 
             return jsonResponse;
+           //Error handling in case something goes wrong
         } else {
             errorHandler.newError("error", "", "Hittade inga svar efter " + url);
             }
@@ -35,15 +39,15 @@ export function categoryFiller(){
             }
         })
 }
-
-export async function getData(id, subject, page) {
+    //Get data about what the user put in the searchfield 
+export async function getData(id, subject, page) { 
     const baseUrl = "https://swapi.dev/api/";
-
+    //Depending on the search results, if there are only 1-10 there, the page is set to 1
     if(!page){
          page = 1;
     }
     const url = `${baseUrl}${subject}/?search=${id}&page=${page}`;
-    await fetchApi(url)
+    await fetchApi(url) //Waiting for the function fetchApi to run
         .then(response => {
            
             setTimeout(() => {
